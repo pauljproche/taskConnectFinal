@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function() {
+            debugger;
+           $("#header").load("Header.html");
+        });
+     </script>
+    <style>
+    .container {
+        margin-top: 3px; /*add the small margin at top*/
+        background-color:#2E4272;
+        display: flex;
+        height: 100vh; /*spans 100% of vert. viewport*/
+        padding: 0px;
+    }
+    .middle-col {
+        background-color:#ffffff;
+        flex-grow: 1;
+        padding: 20px;
+    }
+    </style>
+</head>
+<body>
+    <header id = "header"></header>
+    <div class="container">
+        <div class="middle-col">
+            <h1>My Public Tasks (for Jane Doe)</h1>
+        </div>
+    </div>
+</body>
+</html>
