@@ -34,13 +34,39 @@ http.createServer(async function (req, res) {
           res.writeHead(500, { 'Content-Type': 'text/html' });
           res.end("An error occurred while processing the request.");
         } else {
-          // Replace the placeholders with the queryResult in the index.html content
-          const updatedHtml = indexHtmlContent
-            .replace('<!--QUERY_RESULT_PLACEHOLDER_HEADER-->', JSON.stringify(queryResult.header))
-            .replace('<!--QUERY_RESULT_PLACEHOLDER_MAIN_CONTENT-->', JSON.stringify(queryResult.mainContent));
+          // Manually build the HTML response with the queryResult
+          const htmlResponse = `
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                <script>
+                  $(function() {
+                    $("#header").load("Header.html");
+                    $("#mainContent").load("currentTask.php");
+                  });
+                </script>
+                <title>TaskConnect</title>
+                <style>
+                  /* Your CSS styles here */
+                </style>
+              </head>
+              <body>
+                <div id="mainContainer">
+                  <header id="header">${JSON.stringify(queryResult.header)}</header>
+                  <div class="container">
+                    <div class="left-col"></div>
+                    <div id="mainContent" class="middle-col">${JSON.stringify(queryResult.mainContent)}</div>
+                    <div class="right-col">RIGHT COLUMN</div>
+                  </div>
+                </div>
+              </body>
+            </html>
+          `;
 
           res.writeHead(200, { 'Content-Type': 'text/html' });
-          res.end(updatedHtml);
+          res.end(htmlResponse);
         }
       });
     } catch (err) {
