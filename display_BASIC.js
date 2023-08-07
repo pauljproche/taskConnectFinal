@@ -2,9 +2,6 @@ const { MongoClient } = require('mongodb');
 const http = require('http');
 const fs = require('fs');
 
-// Serve static files from the 'public' directory
-//app.use(express.static('public'));
-
 const uri = "mongodb+srv://taskconnect2:V02gss7wWBeSd47M@cluster0.szozfpl.mongodb.net/?retryWrites=true&w=majority";
 
 async function run() {
@@ -161,6 +158,46 @@ http.createServer(async function (req, res) {
       res.writeHead(500, { 'Content-Type': 'text/html' });
       res.end("An error occurred while processing the request.");
     }
+  } else if (req.url === '/about') {
+    // Handle the '/about' route here
+    fs.readFile('about.html', 'utf8', (err, aboutHtmlContent) => {
+      if (err) {
+        console.log("Error reading about.html:", err);
+        res.writeHead(500, { 'Content-Type': 'text/html' });
+        res.end("An error occurred while processing the request.");
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(aboutHtmlContent);
+      }
+    });
+  } else if (req.url === '/loginpage.html') {
+    // Handle the '/loginpage.html' route here
+    fs.readFile('loginpage.html', 'utf8', (err, loginHtmlContent) => {
+      if (err) {
+        console.log("Error reading loginpage.html:", err);
+        res.writeHead(500, { 'Content-Type': 'text/html' });
+        res.end("An error occurred while processing the request.");
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(loginHtmlContent);
+      }
+    });
+  } else if (req.url === '/signuppage.html') {
+    // Handle the '/signuppage.html' route here
+    fs.readFile('signuppage.html', 'utf8', (err, signupHtmlContent) => {
+      if (err) {
+        console.log("Error reading signuppage.html:", err);
+        res.writeHead(500, { 'Content-Type': 'text/html' });
+        res.end("An error occurred while processing the request.");
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(signupHtmlContent);
+      }
+    });
+  } else {
+    // Handle unknown routes here
+    res.writeHead(404, { 'Content-Type': 'text/html' });
+    res.end("Page not found.");
   }
 }).listen(port, () => {
   console.log(`Server running on port ${port}`);
