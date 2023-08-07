@@ -128,7 +128,7 @@ http.createServer(async function (req, res) {
                             <li><a href="index.html">
                                 <img class="icon" src="Images/logo.png" alt="company logo" />
                             </a></li>
-                            <li class="hide-on-small-screen"><a href="#">TaskConnect</a></li>
+                            <li class="hide-on-small-screen"><a href="index.html">TaskConnect</a></li>
                         </ul>
             
                         <ul>
