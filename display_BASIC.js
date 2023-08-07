@@ -144,7 +144,7 @@ http.createServer(async function (req, res) {
                         <h2>TaskConnect!</h2>
                         <a href="signuppage.html" class="button">Sign Up</a>
                     </div>
-                    <img src="http://localhost:3000/smile.png" alt="Image" class="right-image">
+                    <img src="Images/frontpage.png" alt="Image" class="right-image">
                 </div>
             </body>
             </html>`;
