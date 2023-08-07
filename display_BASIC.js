@@ -194,6 +194,18 @@ http.createServer(async function (req, res) {
         res.end(signupHtmlContent);
       }
     });
+  } else if (req.url === '/index.html') {
+    // Handle the '/index.html' route here
+    fs.readFile('index.html', 'utf8', (err, indexHtmlContent) => {
+      if (err) {
+        console.log("Error reading index.html:", err);
+        res.writeHead(500, { 'Content-Type': 'text/html' });
+        res.end("An error occurred while processing the request.");
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(indexHtmlContent);
+      }
+    });
   } else {
     // Handle unknown routes here
     res.writeHead(404, { 'Content-Type': 'text/html' });
