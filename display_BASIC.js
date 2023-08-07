@@ -1,5 +1,6 @@
 const { MongoClient } = require('mongodb');
 const http = require('http');
+const fs = require('fs');
 
 const uri = "mongodb+srv://taskconnect2:V02gss7wWBeSd47M@cluster0.szozfpl.mongodb.net/?retryWrites=true&w=majority";
 
@@ -26,35 +27,22 @@ http.createServer(async function (req, res) {
     try {
       const queryResult = await run();
 
-      const htmlResponse = `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title>TaskConnect</title>
-            <style>
-              body {
-                font-family: Arial, sans-serif;
-              }
-              h2 {
-                color: #333;
-              }
-              pre {
-                background-color: #f0f0f0;
-                padding: 10px;
-              }
-            </style>
-          </head>
-          <body>
-            <h2>Hello World</h2>
-            <p>Success! This app is deployed online</p>
-            <h3>Query Results:</h3>
-            <pre>${queryResult}</pre>
-          </body>
-        </html>
-      `;
+      // Read the content of index.html from the file system
+      fs.readFile('index.html', 'utf8', (err, indexHtmlContent) => {
+        if (err) {
+          console.log("Error reading index.html:", err);
+          res.writeHead(500, { 'Content-Type': 'text/html' });
+          res.end("An error occurred while processing the request.");
+        } else {
+          // Replace the placeholders with the queryResult in the index.html content
+          const updatedHtml = indexHtmlContent
+            .replace('<!--QUERY_RESULT_PLACEHOLDER_HEADER-->', JSON.stringify(queryResult.header))
+            .replace('<!--QUERY_RESULT_PLACEHOLDER_MAIN_CONTENT-->', JSON.stringify(queryResult.mainContent));
 
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end(htmlResponse);
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.end(updatedHtml);
+        }
+      });
     } catch (err) {
       console.log("Error in request:", err);
       res.writeHead(500, { 'Content-Type': 'text/html' });
