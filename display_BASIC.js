@@ -27,30 +27,20 @@ http.createServer(async function (req, res) {
     try {
       const queryResult = await run();
 
-      // Read the content of Header.html from the file system
-      fs.readFile('Header.html', 'utf8', (err, headerHtmlContent) => {
+      // Read the content of index.html from the file system
+      fs.readFile('index.html', 'utf8', (err, indexHtmlContent) => {
         if (err) {
-          console.log("Error reading Header.html:", err);
+          console.log("Error reading index.html:", err);
           res.writeHead(500, { 'Content-Type': 'text/html' });
           res.end("An error occurred while processing the request.");
         } else {
-          // Replace the placeholder with the query result in the header HTML
-          headerHtmlContent = headerHtmlContent.replace('<!--QUERY_RESULT_PLACEHOLDER-->', JSON.stringify(queryResult));
+          // Replace the placeholders in index.html with the queryResult
+          const updatedHtml = indexHtmlContent
+            .replace('<!--QUERY_RESULT_PLACEHOLDER_HEADER-->', JSON.stringify(queryResult.header))
+            .replace('<!--QUERY_RESULT_PLACEHOLDER_MAIN_CONTENT-->', JSON.stringify(queryResult.mainContent));
 
-          // Read the content of index.html from the file system
-          fs.readFile('index.html', 'utf8', (err, indexHtmlContent) => {
-            if (err) {
-              console.log("Error reading index.html:", err);
-              res.writeHead(500, { 'Content-Type': 'text/html' });
-              res.end("An error occurred while processing the request.");
-            } else {
-              // Manually build the HTML response with the queryResult
-              const htmlResponse = indexHtmlContent.replace('<!--HEADER_CONTENT_PLACEHOLDER-->', headerHtmlContent);
-
-              res.writeHead(200, { 'Content-Type': 'text/html' });
-              res.end(htmlResponse);
-            }
-          });
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.end(updatedHtml);
         }
       });
     } catch (err) {
