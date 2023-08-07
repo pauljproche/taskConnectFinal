@@ -37,33 +37,69 @@ http.createServer(async function (req, res) {
           // Manually build the HTML response with the queryResult
           const htmlResponse = `
             <!DOCTYPE html>
-            <html>
-              <head>
-                <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                <script>
+          <html>
+          <head>
+              <meta name = "viewport" charset = "utf-8" content = "width=device-width, initial-scale=1.0">
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+              <script>
                   $(function() {
-                    $("#header").load("Header.html");
-                    $("#mainContent").load("currentTask.php");
+                     $("#header").load("Header.html");
+                     $("#mainContent").load("currentTask.php");
                   });
-                </script>
-                <title>TaskConnect</title>
-                <style>
-                  /* Your CSS styles here */
-                </style>
-              </head>
-              <body>
-                <div id="mainContainer">
-                  <header id="header">${JSON.stringify(queryResult.header)}</header>
+              </script>
+              <title>TaskConnect</title>
+              <style>
+                  body {
+                      margin: 0;
+                      background-color: #2B3A45; /* Set background color for body */
+                  }
+                  a { 
+                      text-decoration: none;
+                      color: #000000; 
+                  }
+                  /* div {
+                      color: #000000;
+                      padding: 10px;
+                  } */
+                  .container {
+                      margin-top: 3px; /*add the small margin at top*/
+                      background-color:#2E4272;
+                      display: flex;
+                      height: 100vh; /*spans 100% of vert. viewport*/
+                      padding: 0px;
+                  }
+                  .left-col {
+                      background-color:#2B3A45;
+                      width: 200px;
+                  }
+                  .middle-col {
+                      background-color: #EAEAEA;
+                      flex-grow: 1;
+                      padding: 20px;
+                  }
+                  .right-col {
+                      background-color:#D5D5D5;
+                      width: 200px;
+                  }
+                  @media (max-width: 600px) {
+                      /*hide these elements*/
+                      .hide-on-small-screen {
+                          display: none;
+                      }
+                  }
+              </style>
+          </head>
+          <body>
+              <div id="mainContainer">
+                  <header id = "header"></header>
                   <div class="container">
-                    <div class="left-col"></div>
-                    <div id="mainContent" class="middle-col">${JSON.stringify(queryResult.mainContent)}</div>
-                    <div class="right-col">RIGHT COLUMN</div>
+                      <div class="left-col"></div>
+                      <div id = "mainContent" class="middle-col"></div>
+                      <div class="right-col">RIGHT COLUMN</div>
                   </div>
-                </div>
-              </body>
-            </html>
-          `;
+              </div>
+          </body>
+          </html>`;
 
           res.writeHead(200, { 'Content-Type': 'text/html' });
           res.end(htmlResponse);
