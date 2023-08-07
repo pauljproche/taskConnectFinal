@@ -27,82 +27,30 @@ http.createServer(async function (req, res) {
     try {
       const queryResult = await run();
 
-      // Read the content of index.html from the file system
-      fs.readFile('index.html', 'utf8', (err, indexHtmlContent) => {
+      // Read the content of Header.html from the file system
+      fs.readFile('Header.html', 'utf8', (err, headerHtmlContent) => {
         if (err) {
-          console.log("Error reading index.html:", err);
+          console.log("Error reading Header.html:", err);
           res.writeHead(500, { 'Content-Type': 'text/html' });
           res.end("An error occurred while processing the request.");
         } else {
-          // Manually build the HTML response with the queryResult
-          const htmlResponse = `
-            <!DOCTYPE html>
-          <html>
-          <head>
-              <meta name = "viewport" charset = "utf-8" content = "width=device-width, initial-scale=1.0">
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-              <script>
-                  $(function() {
-                     $("#header").load("Header.html");
-                     $("#mainContent").load("currentTask.php");
-                  });
-              </script>
-              <title>TaskConnect</title>
-              <style>
-                  body {
-                      margin: 0;
-                      background-color: #2B3A45; /* Set background color for body */
-                  }
-                  a { 
-                      text-decoration: none;
-                      color: #000000; 
-                  }
-                  /* div {
-                      color: #000000;
-                      padding: 10px;
-                  } */
-                  .container {
-                      margin-top: 3px; /*add the small margin at top*/
-                      background-color:#2E4272;
-                      display: flex;
-                      height: 100vh; /*spans 100% of vert. viewport*/
-                      padding: 0px;
-                  }
-                  .left-col {
-                      background-color:#2B3A45;
-                      width: 200px;
-                  }
-                  .middle-col {
-                      background-color: #EAEAEA;
-                      flex-grow: 1;
-                      padding: 20px;
-                  }
-                  .right-col {
-                      background-color:#D5D5D5;
-                      width: 200px;
-                  }
-                  @media (max-width: 600px) {
-                      /*hide these elements*/
-                      .hide-on-small-screen {
-                          display: none;
-                      }
-                  }
-              </style>
-          </head>
-          <body>
-              <div id="mainContainer">
-                  <header id = "header"></header>
-                  <div class="container">
-                      <div class="left-col"></div>
-                      <div id = "mainContent" class="middle-col"></div>
-                      <div class="right-col">RIGHT COLUMN</div>
-                  </div>
-              </div>
-          </body>
-          </html>`;
+          // Replace the placeholder with the query result in the header HTML
+          headerHtmlContent = headerHtmlContent.replace('<!--QUERY_RESULT_PLACEHOLDER-->', JSON.stringify(queryResult));
 
-          res.writeHead(200, { 'Content-Type': 'text/html' });
-          res.end(htmlResponse);
+          // Read the content of index.html from the file system
+          fs.readFile('index.html', 'utf8', (err, indexHtmlContent) => {
+            if (err) {
+              console.log("Error reading index.html:", err);
+              res.writeHead(500, { 'Content-Type': 'text/html' });
+              res.end("An error occurred while processing the request.");
+            } else {
+              // Manually build the HTML response with the queryResult
+              const htmlResponse = indexHtmlContent.replace('<!--HEADER_CONTENT_PLACEHOLDER-->', headerHtmlContent);
+
+              res.writeHead(200, { 'Content-Type': 'text/html' });
+              res.end(htmlResponse);
+            }
+          });
         }
       });
     } catch (err) {
