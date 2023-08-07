@@ -34,13 +34,75 @@ http.createServer(async function (req, res) {
           res.writeHead(500, { 'Content-Type': 'text/html' });
           res.end("An error occurred while processing the request.");
         } else {
-          // Replace the placeholders in index.html with the queryResult
-          const updatedHtml = indexHtmlContent
-            .replace('<!--QUERY_RESULT_PLACEHOLDER_HEADER-->', JSON.stringify(queryResult.header))
-            .replace('<!--QUERY_RESULT_PLACEHOLDER_MAIN_CONTENT-->', JSON.stringify(queryResult.mainContent));
+          // Manually build the HTML response with the queryResult
+          const htmlResponse = `
+            <!DOCTYPE html>
+          <html>
+          <head>
+              <meta name = "viewport" charset = "utf-8" content = "width=device-width, initial-scale=1.0">
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+              <script>
+                  $(function() {
+                     $("#header").load("Header.html");
+                     $("#mainContent").load("currentTask.php");
+                  });
+              </script>
+              <title>TaskConnect</title>
+              <style>
+                  body {
+                      margin: 0;
+                      background-color: #2B3A45; /* Set background color for body */
+                  }
+                  a { 
+                      text-decoration: none;
+                      color: #000000; 
+                  }
+                  /* div {
+                      color: #000000;
+                      padding: 10px;
+                  } */
+                  .container {
+                      margin-top: 3px; /*add the small margin at top*/
+                      background-color:#2E4272;
+                      display: flex;
+                      height: 100vh; /*spans 100% of vert. viewport*/
+                      padding: 0px;
+                  }
+                  .left-col {
+                      background-color:#2B3A45;
+                      width: 200px;
+                  }
+                  .middle-col {
+                      background-color: #EAEAEA;
+                      flex-grow: 1;
+                      padding: 20px;
+                  }
+                  .right-col {
+                      background-color:#D5D5D5;
+                      width: 200px;
+                  }
+                  @media (max-width: 600px) {
+                      /*hide these elements*/
+                      .hide-on-small-screen {
+                          display: none;
+                      }
+                  }
+              </style>
+          </head>
+          <body>
+              <div id="mainContainer">
+                  <header id = "header"><!--QUERY_RESULT_PLACEHOLDER_HEADER--></header>
+                  <div class="container">
+                      <div class="left-col"></div>
+                      <div id = "mainContent" class="middle-col"><!--QUERY_RESULT_PLACEHOLDER_MAIN_CONTENT--></div>
+                      <div class="right-col">RIGHT COLUMN</div>
+                  </div>
+              </div>
+          </body>
+          </html>`;
 
           res.writeHead(200, { 'Content-Type': 'text/html' });
-          res.end(updatedHtml);
+          res.end(htmlResponse);
         }
       });
     } catch (err) {
