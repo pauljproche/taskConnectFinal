@@ -54,8 +54,16 @@
       <script>
         // Use jQuery to load the "Header.html" and "currentTask.php" files
         $(function() {
-          $("#header").load("Header.html");
-          $("#mainContent").load("currentTask.php");
+          $("#header").load("Header.html", function(response, status, xhr) {
+            if (status === "error") {
+              console.log("Error loading Header.html:", xhr.statusText);
+            }
+          });
+          $("#mainContent").load("currentTask.php", function(response, status, xhr) {
+            if (status === "error") {
+              console.log("Error loading currentTask.php:", xhr.statusText);
+            }
+          });
         });
       </script>
     </div>
