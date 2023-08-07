@@ -1,7 +1,3 @@
-// For express.static serving
-const express = require('express');
-const app = express();
-
 const { MongoClient } = require('mongodb');
 const http = require('http');
 const fs = require('fs');
