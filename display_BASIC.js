@@ -26,14 +26,14 @@ async function run() {
 const port = process.env.PORT || 3000;
 
 http.createServer(async function (req, res) {
-  if (req.url === '/') {
+  if (req.url === '/frontpage.html') { // Update the route here
     try {
       const queryResult = await run();
 
-      // Read the content of index.html from the file system
-      fs.readFile('index.html', 'utf8', (err, indexHtmlContent) => {
+      // Read the content of frontpage.html from the file system
+      fs.readFile('frontpage.html', 'utf8', (err, frontpageHtmlContent) => {
         if (err) {
-          console.log("Error reading index.html:", err);
+          console.log("Error reading frontpage.html:", err);
           res.writeHead(500, { 'Content-Type': 'text/html' });
           res.end("An error occurred while processing the request.");
         } else {
