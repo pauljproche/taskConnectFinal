@@ -28,30 +28,69 @@ http.createServer(async function (req, res) {
 
       const htmlResponse = `
         <!DOCTYPE html>
-        <html>
-          <head>
-            <title>TaskConnect</title>
-            <style>
-              body {
-                font-family: Arial, sans-serif;
-              }
-              h2 {
-                color: #333;
-              }
-              pre {
-                background-color: #f0f0f0;
-                padding: 10px;
-              }
-            </style>
-          </head>
-          <body>
-            <h2>Hello World</h2>
-            <p>Success! This app is deployed online</p>
-            <h3>Query Results:</h3>
-            <pre>${queryResult}</pre>
-          </body>
-        </html>
-      `;
+<html>
+<head>
+    <meta name = "viewport" charset = "utf-8" content = "width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function() {
+           $("#header").load("Header.html");
+           $("#mainContent").load("currentTask.php");
+        });
+    </script>
+    <title>TaskConnect</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #2B3A45; /* Set background color for body */
+        }
+        a { 
+            text-decoration: none;
+            color: #000000; 
+        }
+        /* div {
+            color: #000000;
+            padding: 10px;
+        } */
+        .container {
+            margin-top: 3px; /*add the small margin at top*/
+            background-color:#2E4272;
+            display: flex;
+            height: 100vh; /*spans 100% of vert. viewport*/
+            padding: 0px;
+        }
+        .left-col {
+            background-color:#2B3A45;
+            width: 200px;
+        }
+        .middle-col {
+            background-color: #EAEAEA;
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .right-col {
+            background-color:#D5D5D5;
+            width: 200px;
+        }
+        @media (max-width: 600px) {
+            /*hide these elements*/
+            .hide-on-small-screen {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="mainContainer">
+        <header id = "header"></header>
+        <div class="container">
+            <div class="left-col"></div>
+            <div id = "mainContent" class="middle-col"></div>
+            <div class="right-col">RIGHT COLUMN</div>
+        </div>
+    </div>
+</body>
+</html>
 
       res.writeHead(200, { 'Content-Type': 'text/html' });
       res.end(htmlResponse);
