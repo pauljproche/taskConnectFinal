@@ -54,7 +54,7 @@ http.createServer(async function (req, res) {
                     ${htmlContent}
                     <div>
                       <h2>Query Results:</h2>
-                      <pre>${queryResult2String}</pre>
+                      <p>${queryResult2String}</p>
                     </div>  
                 </body>
                 </html>`;
