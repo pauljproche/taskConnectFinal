@@ -72,6 +72,7 @@ http.createServer(async function (req, res) {
                       <div>
                         <h2>Query Results1:</h2>
                         <pre>${queryResult1String}</pre>
+                        <pre>${queryResult2String}</pre>
                       </div>
                   </body>
                   <script>
