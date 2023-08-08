@@ -14,7 +14,7 @@ async function run(collectionName) {
     const query = await collection.find({}).toArray();
     return query;
   } catch (err) {
-    console.log("Error in MongoDB query for collection ${collectionName}:", err);
+    console.log("Error in MongoDB query for collection:", err);
     throw err;
   } finally {
     await client.close();
