@@ -294,10 +294,13 @@ http.createServer(async function (req, res) {
                         <div class="container">
                             <div class="left-col"></div>             
                             <div id="mainContent" class="middle-col">
-                                    <h2>Query Results:</h2>
-                                    <pre>${queryResult2String}</pre>
+                                    <h2>TaskCard Query Results:</h2>
+                                    <pre>${queryResultString}</pre>
                             </div>
-                            <div class="right-col">RIGHT COLUMN</div>       
+                            <div class="right-col">
+                                    <h2>User Query Results:</h2>
+                                    <pre>${queryResultString}</pre>
+                            </div>       
                         </div>
                     </div>
                 </body>
