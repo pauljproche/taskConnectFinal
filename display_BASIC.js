@@ -125,7 +125,7 @@ http.createServer(async function (req, res) {
                 <header>
                     <nav>
                         <ul class="logo iconContainer">
-                            <li><a href="index.html">
+                            <li><a href="/">
                                 <img class="icon" src="https://pauljproche.github.io/taskConnectFinal/Images/logo.png" alt="company logo" />
                             </a></li>
                             <li class="hide-on-small-screen"><a href="/home">TaskConnect</a></li>
@@ -133,7 +133,7 @@ http.createServer(async function (req, res) {
             
                         <ul>
                             <li class="hide-on-small-screen"><a href="#">About Us</a></li>
-                            <li><a href="loginpage.html"  class="navbutton">Log In</a></li>
+                            <li><a href="/loginpage"  class="navbutton">Log In</a></li>
                         </ul>
                     </nav>
                 </header>
