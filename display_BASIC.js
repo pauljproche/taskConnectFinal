@@ -223,8 +223,8 @@ http.createServer(async function (req, res) {
       }
     });
   } else if (req.url === '/profile.html') {
-    // Handle the '/settings.html' route here
-    fs.readFile('settings.html', 'utf8', (err, indexHtmlContent) => {
+    // Handle the '/profile.html' route here
+    fs.readFile('profile.html', 'utf8', (err, indexHtmlContent) => {
       if (err) {
         console.log("Error reading index.html:", err);
         res.writeHead(500, { 'Content-Type': 'text/html' });
