@@ -1,9 +1,12 @@
+const express = require('express');
+const app = express();
+
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
+
 const { MongoClient } = require('mongodb');
 const http = require('http');
 const fs = require('fs');
-
-// Serve static files from the 'public' directory
-//app.use(express.static('public'));
 
 const uri = "mongodb+srv://taskconnect2:V02gss7wWBeSd47M@cluster0.szozfpl.mongodb.net/?retryWrites=true&w=majority";
 
