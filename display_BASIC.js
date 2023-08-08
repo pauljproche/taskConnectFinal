@@ -198,8 +198,8 @@ http.createServer(async function (req, res) {
         res.end(signupHtmlContent);
       }
     });
-  } else if (req.url === '/index') {
-    // Handle the '/index.html' route here
+  } else if (req.url === '/home') {
+    // Handle the '/home.html' route here
     fs.readFile('index.html', 'utf8', (err, indexHtmlContent) => {
       if (err) {
         console.log("Error reading index.html:", err);
