@@ -34,9 +34,6 @@ http.createServer(async function (req, res) {
       const queryResult2String = JSON.stringify(queryResult2, null, 2);
       
       const htmlFile = req.url === '/' ? 'frontpage.html' : 'index.html';
-      // const frontpageTemplate = fs.readFileSync('frontpage.html', 'utf8');
-      // const indexTemplate = fs.readFileSync('index.html', 'utf8');
-      // const htmlResponse = 
 
       fs.readFile(htmlFile, 'utf8', (err, htmlContent) => {
         if (err) {
@@ -57,11 +54,12 @@ http.createServer(async function (req, res) {
                     ${htmlContent}
                     <div>
                       <h2>Query Results:</h2>
-                      <pre>${queryResult2String}</pre>
+                      <p>${queryResult2String}</p>
                     </div>  
                 </body>
                 </html>`;
           } else {
+            // let htmlCon = htmlContent.replace('QUERY_RESULT_2_STRING_PLACEHOLDER', queryResult2String);
             htmlResponse = `
                   <!DOCTYPE html>
                   <html>
@@ -72,14 +70,14 @@ http.createServer(async function (req, res) {
                   <body>
                       ${htmlContent}
                       <div>
-                        <h2>Query Results:</h2>
+                        <h2>Query Results1:</h2>
                         <pre>${queryResult1String}</pre>
+                        <pre>${queryResult2String}</pre>
                       </div>
-                      <div>
-                      <h2>Query Results:</h2>
-                      <pre>${queryResult2String}</pre>
-                      </div>  
                   </body>
+                  <script>
+                    document.getElementById('rightNav').innerHTML = ${queryResult2String};
+                  </script>
                   </html>`;
           }
           res.writeHead(200, { 'Content-Type': 'text/html' });
