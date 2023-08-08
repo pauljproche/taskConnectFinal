@@ -222,9 +222,9 @@ http.createServer(async function (req, res) {
         res.end(indexHtmlContent);
       }
     });
-  } else if (req.url === '/profile.html') {
-    // Handle the '/profile.html' route here
-    fs.readFile('profile.html', 'utf8', (err, indexHtmlContent) => {
+  } else if (req.url === '/profilepage.html') {
+    // Handle the '/profilepage.html' route here
+    fs.readFile('profilepage.html', 'utf8', (err, indexHtmlContent) => {
       if (err) {
         console.log("Error reading index.html:", err);
         res.writeHead(500, { 'Content-Type': 'text/html' });
