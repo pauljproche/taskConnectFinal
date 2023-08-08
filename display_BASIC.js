@@ -198,7 +198,7 @@ http.createServer(async function (req, res) {
         res.end(signupHtmlContent);
       }
     });
-  } else if (req.url === '/index.html') {
+  } else if (req.url === '/index') {
     // Handle the '/index.html' route here
     fs.readFile('index.html', 'utf8', (err, indexHtmlContent) => {
       if (err) {
