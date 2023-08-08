@@ -1,9 +1,3 @@
-const express = require('express');
-const app = express();
-
-// Serve static files from the 'public' directory
-app.use(express.static('public'));
-
 const { MongoClient } = require('mongodb');
 const http = require('http');
 const fs = require('fs');
