@@ -234,7 +234,7 @@ http.createServer(async function (req, res) {
         res.end(indexHtmlContent);
       }
     });
-  else {
+  } else {
     // Handle unknown routes here
     res.writeHead(404, { 'Content-Type': 'text/html' });
     res.end("Page not found.");
