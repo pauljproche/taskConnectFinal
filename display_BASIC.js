@@ -146,6 +146,10 @@ http.createServer(async function (req, res) {
                     </div>
                     <img src="Images/frontpage.png" alt="Image" class="right-image">
                 </div>
+                <div>
+                      <h2>Query Results:</h2>
+                      <pre>${queryResult}</pre>
+                </div>
             </body>
             </html>`;
 
