@@ -299,7 +299,7 @@ http.createServer(async function (req, res) {
                             </div>
                             <div class="right-col">
                                     <h2>User Query Results:</h2>
-                                    <pre>${queryResultString}</pre>
+                                    <pre>${queryResult2String}</pre>
                             </div>       
                         </div>
                     </div>
