@@ -1,6 +1,6 @@
 const express = require("express");
 const { updateUserEmail, updateUsername, updatePassword, registerUser } = require("../controllers/userControllers");
-const { protect } = require("../middleware/auth"); // Authentication middleware
+const { protect } = require("../middleware/auth"); 
 const router = express.Router();
 
 // Update user's email

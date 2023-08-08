@@ -15,6 +15,7 @@ async function registerUser(req, res) {
         
         // Create a new user document
         const newUser = new User({
+            google_Id,
             username,
             email,
             password // Hash the password before saving it

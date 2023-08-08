@@ -4,9 +4,8 @@ const userSchema = new mongoose.Schema({
   googleId: { type: String, required: true, unique: true },
   displayName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  // Other fields...
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema, 'userProfile');
 
 module.exports = User;
