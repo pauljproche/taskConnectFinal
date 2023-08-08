@@ -80,6 +80,7 @@ http.createServer(async function (req, res) {
                     //document.getElementById('rightNav').innerHTML = queryResult2Array[0].name;
                         
                     const firstFollowerName = queryResult1[0].follower[0].name;
+                    console.log(queryResult1); // to see the actual data being returned
                     document.getElementById('rightNav').innerHTML = firstFollowerName;
                   </script>
                   </html>`;
