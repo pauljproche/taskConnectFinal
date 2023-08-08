@@ -4,16 +4,17 @@ const fs = require('fs');
 
 const uri = "mongodb+srv://taskconnect2:V02gss7wWBeSd47M@cluster0.szozfpl.mongodb.net/?retryWrites=true&w=majority";
 
-async function run() {
+async function run(collectionName) {
   const client = new MongoClient(uri);
+  
   try {
     await client.connect();
     const database = client.db("taskConnect");
-    const collection = database.collection("taskCard");
+    const collection = database.collection(collectionName);
     const query = await collection.find({}).toArray();
-    return JSON.stringify(query, null, 2);
+    return query;
   } catch (err) {
-    console.log("Error in MongoDB query:", err);
+    console.log("Error in MongoDB query for collection ${collectionName}:", err);
     throw err;
   } finally {
     await client.close();
@@ -25,8 +26,13 @@ const port = process.env.PORT || 3000;
 http.createServer(async function (req, res) {
   if (req.url === '/' || req.url === '/home') {
     try {
-      const queryResult = await run();
+      const queryResult1 = await run("taskCard");
+      const queryResult2 = await run("userProfile");
 
+      // Convert results to a string for display
+      const queryResult1String = JSON.stringify(queryResult1, null, 2);
+      const queryResult2String = JSON.stringify(queryResult2, null, 2);
+      
       const htmlFile = req.url === '/' ? 'frontpage.html' : 'index.html';
 
       fs.readFile(htmlFile, 'utf8', (err, htmlContent) => {
@@ -150,7 +156,7 @@ http.createServer(async function (req, res) {
                 </div>
                 <div>
                       <h2>Query Results:</h2>
-                      <pre>${queryResult}</pre>
+                      <pre>${queryResult1String}</pre>
                 </div>
             </body>
             </html>`;
@@ -289,7 +295,7 @@ http.createServer(async function (req, res) {
                             <div class="left-col"></div>             
                             <div id="mainContent" class="middle-col">
                                     <h2>Query Results:</h2>
-                                    <pre>${queryResult}</pre>
+                                    <pre>${queryResult2String}</pre>
                             </div>
                             <div class="right-col">RIGHT COLUMN</div>       
                         </div>
