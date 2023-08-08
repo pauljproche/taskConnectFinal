@@ -60,7 +60,6 @@ http.createServer(async function (req, res) {
                 </html>`;
           } else {
             // let htmlCon = htmlContent.replace('QUERY_RESULT_2_STRING_PLACEHOLDER', queryResult2String);
-            let ele = queryResult2String[0].taskName;
             htmlResponse = `
                   <!DOCTYPE html>
                   <html>
@@ -77,7 +76,8 @@ http.createServer(async function (req, res) {
                       </div>
                   </body>
                   <script>
-                    document.getElementById('rightNav').innerHTML = ${ele};
+                    const queryResult2Array = ${queryResult2String};
+                    document.getElementById('rightNav').innerHTML = queryResult2Array[0].taskName;
                   </script>
                   </html>`;
           }
