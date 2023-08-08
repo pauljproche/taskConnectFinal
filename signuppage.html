@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaskConnect - Sign Up Page</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
@@ -131,14 +132,15 @@
             <h2 class='title'style="margin-left: 5px;">Sign Up</h2>
             <div style="margin-left: 5px;">
                 <h1 class="title">Hello, Welcome!</h1>
-                <form class="signup-form">
-                    <input type="text" class="signup-input" placeholder="Email" required>
-                    <input type="text" class="signup-input" placeholder="Password" required>
+                <form class="signup-form" action="/register" method="post">
+                    <input type="text" class="signup-input" placeholder="Email" name="email" required>
+                    <input type="text" class="signup-input" placeholder="Username" name="username" required>
+                    <input type="password" class="signup-input" placeholder="Password" name="password" required>
                     <input type="submit" class="button" value="Sign Up with Email">
                             <!-- Google "Sign in with Google" button container -->
                     <div class="g_id_signin"
                         data-client_id="434361129103-hkuonu5rhorgcv26dglqs902dnqlnkho.apps.googleusercontent.com"
-                        data-login_uri="https://your.domain/your_login_endpoint"
+                        data-login_uri="https://taskconnect12345-e825a4493aff.herokuapp.com/"
                         data-auto_prompt="false"
                         data-type="standard"
                         data-size="large"
@@ -175,3 +177,4 @@
     </script>
 </body>
 </html> 
+
