@@ -174,7 +174,7 @@ http.createServer(async function (req, res) {
         res.end(aboutHtmlContent);
       }
     });
-  } else if (req.url === '/loginpage.html') {
+  } else if (req.url === '/loginpage') {
     // Handle the '/loginpage.html' route here
     fs.readFile('loginpage.html', 'utf8', (err, loginHtmlContent) => {
       if (err) {
@@ -186,7 +186,7 @@ http.createServer(async function (req, res) {
         res.end(loginHtmlContent);
       }
     });
-  } else if (req.url === '/signuppage.html') {
+  } else if (req.url === '/signuppage') {
     // Handle the '/signuppage.html' route here
     fs.readFile('signuppage.html', 'utf8', (err, signupHtmlContent) => {
       if (err) {
@@ -210,7 +210,7 @@ http.createServer(async function (req, res) {
         res.end(indexHtmlContent);
       }
     });
-  } else if (req.url === '/settings.html') {
+  } else if (req.url === '/settings') {
     // Handle the '/settings.html' route here
     fs.readFile('settings.html', 'utf8', (err, indexHtmlContent) => {
       if (err) {
@@ -222,7 +222,7 @@ http.createServer(async function (req, res) {
         res.end(indexHtmlContent);
       }
     });
-  } else if (req.url === '/profilepage.html') {
+  } else if (req.url === '/profilepage') {
     // Handle the '/profilepage.html' route here
     fs.readFile('profilepage.html', 'utf8', (err, indexHtmlContent) => {
       if (err) {
