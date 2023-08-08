@@ -222,6 +222,18 @@ http.createServer(async function (req, res) {
         res.end(indexHtmlContent);
       }
     });
+  } else if (req.url === '/profile.html') {
+    // Handle the '/settings.html' route here
+    fs.readFile('settings.html', 'utf8', (err, indexHtmlContent) => {
+      if (err) {
+        console.log("Error reading index.html:", err);
+        res.writeHead(500, { 'Content-Type': 'text/html' });
+        res.end("An error occurred while processing the request.");
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(indexHtmlContent);
+      }
+    });
   }
   else {
     // Handle unknown routes here
