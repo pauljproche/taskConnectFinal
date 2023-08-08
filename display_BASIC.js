@@ -26,7 +26,6 @@ http.createServer(async function (req, res) {
   if (req.url === '/' || req.url === '/home') {
     try {
       const queryResult = await run();
-      //const queryResultJson = JSON.parse(queryResult);
 
       const htmlFile = req.url === '/' ? 'frontpage.html' : 'index.html';
 
@@ -291,8 +290,6 @@ http.createServer(async function (req, res) {
                             <div id="mainContent" class="middle-col">
                                     <h2>Query Results:</h2>
                                     <pre>${queryResult}</pre>
-                                    <!--<pre>${queryResultJson}</pre>-->
-
                             </div>
                             <div class="right-col">RIGHT COLUMN</div>       
                         </div>
