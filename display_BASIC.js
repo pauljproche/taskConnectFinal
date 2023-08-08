@@ -233,20 +233,7 @@ http.createServer(async function (req, res) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(indexHtmlContent);
       }
-    });h
- } else if (req.url === '/Header.html') {
-    // Handle the '/header.html' route here
-    fs.readFile('Header.html', 'utf8', (err, indexHtmlContent) => {
-      if (err) {
-        console.log("Error reading Header.html:", err);
-        res.writeHead(500, { 'Content-Type': 'text/html' });
-        res.end("An error occurred while processing the request.");
-      } else {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(indexHtmlContent);
-      }
     });
-  }
   else {
     // Handle unknown routes here
     res.writeHead(404, { 'Content-Type': 'text/html' });
