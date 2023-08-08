@@ -81,7 +81,7 @@ http.createServer(async function (req, res) {
                     document.getElementById('rightNav').innerHTML += "<br/>";
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].age;
                     document.getElementById('rightNav').innerHTML += "<br/>";
-                    document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0];
+                    document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0].name;
 
                   </script>
                   </html>`;
