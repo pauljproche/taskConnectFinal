@@ -13,6 +13,9 @@ passport.use(
       try {
         // Check if the user already exists based on the Google profile ID
         let user = await User.findOne({ googleId: profile.id });
+        const googleId = profile.id;
+        const displayName = profile.displayName;
+        const email = profile.emails[0].value; 
 
         if (!user) {
           // Create a new user if not found
