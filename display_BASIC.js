@@ -286,10 +286,8 @@ http.createServer(async function (req, res) {
                     <div id="mainContainer">
                         <header id="header"></header>
                         <div class="container">
-                            <!-- ${htmlContent} -->
                             <div class="left-col"></div>             
                             <div id="mainContent" class="middle-col">
-                            ${htmlContent}
                                     <h2>Query Results:</h2>
                                     <pre>${queryResult}</pre>
                             </div>
