@@ -78,6 +78,7 @@ http.createServer(async function (req, res) {
                   <script>
                     const queryResult2Array = ${queryResult2String};
                     document.getElementById('rightNav').innerHTML = queryResult2Array[0].name;
+                    document.getElementById('rightNav').innerHTML = queryResult2Array[0].following[0];
                   </script>
                   </html>`;
           }
