@@ -295,7 +295,7 @@ http.createServer(async function (req, res) {
                             <div class="left-col"></div>             
                             <div id="mainContent" class="middle-col">
                                     <h2>TaskCard Query Results:</h2>
-                                    <pre>${queryResultString}</pre>
+                                    <pre>${queryResult1String}</pre>
                             </div>
                             <div class="right-col">
                                     <h2>User Query Results:</h2>
