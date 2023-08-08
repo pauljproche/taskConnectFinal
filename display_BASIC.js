@@ -286,16 +286,14 @@ http.createServer(async function (req, res) {
                     <div id="mainContainer">
                         <header id="header"></header>
                         <div class="container">
+                            ${htmlContent}
                             <div class="left-col"></div>
-                            <div id="mainContent" class="middle-col"></div>
-                            <div class="right-col">RIGHT COLUMN</div>
-                      <div class="container">
-                                  ${htmlContent}
-                                  <div>
+                            <div>
                                     <h2>Query Results:</h2>
                                     <pre>${queryResult}</pre>
-                                  </div>
-                              </div>
+                            </div>
+                            <div id="mainContent" class="middle-col"></div>
+                            <div class="right-col">RIGHT COLUMN</div>       
                         </div>
                     </div>
                 </body>
