@@ -26,7 +26,7 @@ http.createServer(async function (req, res) {
   if (req.url === '/' || req.url === '/home') {
     try {
       const queryResult = await run();
-      const queryResultAsHtmlTable = buildHtmlTableFromQueryResult(queryResult);
+      //const queryResultAsHtmlTable = buildHtmlTableFromQueryResult(queryResult);
 
       const htmlFile = req.url === '/' ? 'frontpage.html' : 'index.html';
 
@@ -289,8 +289,8 @@ http.createServer(async function (req, res) {
                         <div class="container">
                             <div class="left-col"></div>             
                             <div id="mainContent" class="middle-col">
-                                    <h2>Query Results (As table):</h2>
-                                    <pre>${queryResultAsTable}</pre>
+                                    <h2>Query Results:</h2>
+                                    <pre>${queryResult}</pre>
                             </div>
                             <div class="right-col">RIGHT COLUMN</div>       
                         </div>
@@ -371,6 +371,7 @@ http.createServer(async function (req, res) {
   console.log(`Server running on port ${port}`);
 });
 
+/*
 //Call this function above after the getting queryResult
 function buildHtmlTableFromQueryResult(queryResult) {
   const queryResultJson = JSON.parse(queryResult);
@@ -388,3 +389,4 @@ function buildHtmlTableFromQueryResult(queryResult) {
   const table = `<table><thead>${header}</thead><tbody>${rows}</tbody></table>`;
   return table;
 }
+*/
