@@ -23,19 +23,21 @@ async function run() {
 const port = process.env.PORT || 3000;
 
 http.createServer(async function (req, res) {
-  if (req.url === '/') {
+  if (req.url === '/' || req.url === '/home') {
     try {
       const queryResult = await run();
+      
+      const htmlFile = req.url === '/' ? 'frontpage.html' : 'index.html';
 
-      // Read the content of frontpage.html from the file system
-      fs.readFile('frontpage.html', 'utf8', (err, frontpageHtmlContent) => {
+      fs.readFile(htmlFile, 'utf8', (err, htmlContent) => {
         if (err) {
-          console.log("Error reading frontpage.html:", err);
+          console.log(`Error reading ${htmlFile}:`, err);
           res.writeHead(500, { 'Content-Type': 'text/html' });
           res.end("An error occurred while processing the request.");
         } else {
-          // Manually build the HTML response with the queryResult and frontpageHtmlContent
-          const htmlResponse = `
+          let htmlResponse;
+          if (req.url === '/') {
+            htmlResponse = `
             <!DOCTYPE html>
             <html>
             <head>
@@ -152,6 +154,153 @@ http.createServer(async function (req, res) {
                 </div>
             </body>
             </html>`;
+          } else {
+            htmlResponse = `
+            <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta name = "viewport" charset = "utf-8" content = "width=device-width, initial-scale=1.0">
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                    <script>
+                        $(function() {
+                           $("#header").load("Header.html");
+                           $("#mainContent").load("currentTask.php");
+                        });
+                    </script>
+                    <title>TaskConnect</title>
+                    <style>
+                        body {
+                            margin: 0;
+                            background-color: #2B3A45; /* Set background color for body */
+                        }
+                        a { 
+                            text-decoration: none;
+                            color: #000000; 
+                        }
+                        /* div {
+                            color: #000000;
+                            padding: 10px;
+                        } */
+                        .container {
+                            margin-top: 3px; /*add the small margin at top*/
+                            background-color:#2E4272;
+                            display: flex;
+                            height: 100vh; /*spans 100% of vert. viewport*/
+                            padding: 0px;
+                        }
+                        .left-col {
+                            background-color:#2B3A45;
+                            width: 200px;
+                        }
+                        .middle-col {
+                            background-color: #EAEAEA;
+                            flex-grow: 1;
+                            padding: 20px;
+                        }
+                        .right-col {
+                            background-color:#D5D5D5;
+                            width: 200px;
+                        }
+                        nav {
+                            display: flex;
+                            background-color: #EAEAEA;
+                            align-items: center;
+                            /*vert align*/
+                            justify-content: flex-end;
+                            /*makes nav ele. right aligned*/
+                            white-space: nowrap;
+                        }
+                
+                        nav li {
+                            padding-right: 20px;
+                            display: inline;
+                            /*horizontal align*/
+                        }
+                
+                        .logo {
+                            padding-left: 20px;
+                            margin-right: auto;
+                            /*make logo left aligned*/
+                        }
+                
+                        .icon {
+                            height: 35px;
+                            width: 35px;
+                        }
+                
+                        .settingIcon {
+                            width: 33px;
+                            height: 30px;
+                        }
+                
+                        .profileIcon {
+                            height: 40px;
+                            width: 40px;
+                        }
+                
+                        .iconContainer {
+                            display: flex;
+                            align-items: center;
+                        }
+                        @media (max-width: 600px) {
+                            /*hide these elements*/
+                            .hide-on-small-screen {
+                                display: none;
+                            }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <nav>
+                        <ul class="logo iconContainer">
+                            <li><a href="/">
+                                <img class="icon" src="https://pauljproche.github.io/taskConnectFinal/Images/logo.png" alt="company logo" />
+                            </a></li>
+                            <li><a href="#">Friends</a></li>
+                            <li class="hide-on-small-screen"><a href="#">Challenges</a></li>
+                        </ul>
+                
+                        <ul class="iconContainer">
+                            <li class="hide-on-small-screen">
+                                <a href="/home">
+                                    <img class="icon" src="https://pauljproche.github.io/taskConnectFinal/Images/homeIcon.png" alt="Home Icon" />
+                                </a>
+                            </li>
+                            <!-- <li class="hide-on-small-screen">
+                                <a href="#">
+                                    <img class="icon" src="Images/DoorbellIcon.png" alt="Notifications" />
+                                </a>
+                            </li> -->
+                            <li class="hide-on-small-screen">
+                                <a href="/settings">
+                                    <img class="settingIcon" src="https://pauljproche.github.io/taskConnectFinal/Images/settingIcon.png" alt="Settings" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/profilepage">
+                                    <img class="profileIcon" src="https://pauljproche.github.io/taskConnectFinal/Images/profileIcon.png" alt="Profile" />
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div id="mainContainer">
+                        <header id="header"></header>
+                        <div class="container">
+                            <div class="left-col"></div>
+                            <div id="mainContent" class="middle-col"></div>
+                            <div class="right-col">RIGHT COLUMN</div>
+                      <div class="container">
+                                  ${htmlContent}
+                                  <div>
+                                    <h2>Query Results:</h2>
+                                    <pre>${queryResult}</pre>
+                                  </div>
+                              </div>
+                        </div>
+                    </div>
+                </body>
+                </html>`;
+          }
 
           res.writeHead(200, { 'Content-Type': 'text/html' });
           res.end(htmlResponse);
@@ -163,7 +312,6 @@ http.createServer(async function (req, res) {
       res.end("An error occurred while processing the request.");
     }
   } else if (req.url === '/about') {
-    // Handle the '/about' route here
     fs.readFile('about.html', 'utf8', (err, aboutHtmlContent) => {
       if (err) {
         console.log("Error reading about.html:", err);
@@ -175,7 +323,6 @@ http.createServer(async function (req, res) {
       }
     });
   } else if (req.url === '/loginpage') {
-    // Handle the '/loginpage.html' route here
     fs.readFile('loginpage.html', 'utf8', (err, loginHtmlContent) => {
       if (err) {
         console.log("Error reading loginpage.html:", err);
@@ -187,7 +334,6 @@ http.createServer(async function (req, res) {
       }
     });
   } else if (req.url === '/signuppage') {
-    // Handle the '/signuppage.html' route here
     fs.readFile('signuppage.html', 'utf8', (err, signupHtmlContent) => {
       if (err) {
         console.log("Error reading signuppage.html:", err);
@@ -198,44 +344,29 @@ http.createServer(async function (req, res) {
         res.end(signupHtmlContent);
       }
     });
-  } else if (req.url === '/home') {
-    // Handle the '/home.html' route here
-    fs.readFile('index.html', 'utf8', (err, indexHtmlContent) => {
-      if (err) {
-        console.log("Error reading index.html:", err);
-        res.writeHead(500, { 'Content-Type': 'text/html' });
-        res.end("An error occurred while processing the request.");
-      } else {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(indexHtmlContent);
-      }
-    });
   } else if (req.url === '/settings') {
-    // Handle the '/settings.html' route here
-    fs.readFile('settings.html', 'utf8', (err, indexHtmlContent) => {
+    fs.readFile('settings.html', 'utf8', (err, settingsHtmlContent) => {
       if (err) {
-        console.log("Error reading index.html:", err);
+        console.log("Error reading settings.html:", err);
         res.writeHead(500, { 'Content-Type': 'text/html' });
         res.end("An error occurred while processing the request.");
       } else {
         res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(indexHtmlContent);
+        res.end(settingsHtmlContent);
       }
     });
   } else if (req.url === '/profilepage') {
-    // Handle the '/profilepage.html' route here
-    fs.readFile('profilepage.html', 'utf8', (err, indexHtmlContent) => {
+    fs.readFile('profilepage.html', 'utf8', (err, profileHtmlContent) => {
       if (err) {
-        console.log("Error reading index.html:", err);
+        console.log("Error reading profilepage.html:", err);
         res.writeHead(500, { 'Content-Type': 'text/html' });
         res.end("An error occurred while processing the request.");
       } else {
         res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(indexHtmlContent);
+        res.end(profileHtmlContent);
       }
     });
   } else {
-    // Handle unknown routes here
     res.writeHead(404, { 'Content-Type': 'text/html' });
     res.end("Page not found.");
   }
