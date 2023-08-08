@@ -142,7 +142,7 @@ http.createServer(async function (req, res) {
                         <h2>Get the perfect </h2>
                         <h2>schedule with </h2>
                         <h2>TaskConnect!</h2>
-                        <a href="signuppage.html" class="button">Sign Up</a>
+                        <a href="/signuppage" class="button">Sign Up</a>
                     </div>
                     <img src="https://pauljproche.github.io/taskConnectFinal/Images/frontpage.png" alt="Image" class="right-image">
                 </div>
