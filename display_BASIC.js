@@ -76,7 +76,7 @@ http.createServer(async function (req, res) {
                       </div>
                   </body>
                   <script>
-                    document.getElementById('rightNav').innerHTML = ${queryResult2String};
+                    document.getElementById('rightNav').innerHTML = ${queryResult2String[0].taskName};
                   </script>
                   </html>`;
           }
