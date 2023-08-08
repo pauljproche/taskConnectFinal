@@ -286,7 +286,7 @@ http.createServer(async function (req, res) {
                     <div id="mainContainer">
                         <header id="header"></header>
                         <div class="container">
-                            ${htmlContent}
+                            <!-- ${htmlContent} -->
                             <div class="left-col"></div>
                             <div>
                                     <h2>Query Results:</h2>
