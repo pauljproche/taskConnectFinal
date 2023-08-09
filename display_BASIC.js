@@ -59,7 +59,6 @@ http.createServer(async function (req, res) {
                 </body>
                 </html>`;
           } else {
-            // let htmlCon = htmlContent.replace('QUERY_RESULT_2_STRING_PLACEHOLDER', queryResult2String);
             htmlResponse = `
                   <!DOCTYPE html>
                   <html>
