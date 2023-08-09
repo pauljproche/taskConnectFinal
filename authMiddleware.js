@@ -12,7 +12,8 @@ function protect(req, res, next) {
 
     try {
         // Verify the token
-        const decoded = jwt.verify(token, 'your_secret_key'); // Replace with secret key
+        const decoded = jwt.verify(token, 'K3vNuFuPtB5QfxNw5XS5BWh/LZe63jx+/AMOQMIXE8rHRCqLb8AaI5xx58ZHNWc0Zezz8WcaGLdHwGv89Uu01w==');
+        const token = jwt.sign({ userId: user._id }, 'K3vNuFuPtB5QfxNw5XS5BWh/LZe63jx+/AMOQMIXE8rHRCqLb8AaI5xx58ZHNWc0Zezz8WcaGLdHwGv89Uu01w==', { expiresIn: '1h' });
 
         // Find the user by ID from the decoded token
         User.findById(decoded.userId, (err, user) => {
