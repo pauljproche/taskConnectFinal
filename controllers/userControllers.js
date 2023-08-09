@@ -23,8 +23,9 @@ async function registerUser(req, res) {
         
         // Save the user document to the database
         await newUser.save();
-        
-        res.json({ success: true, message: 'User registered successfully' });
+       
+        res.redirect('https://taskconnect12345-e825a4493aff.herokuapp.com/home'); 
+
     } catch (error) {
         res.status(500).json({ success: false, message: 'Error registering user' });
     }
