@@ -29,6 +29,33 @@ function getPriorityLevel(priorityLevel){
   else return "";
 }
 
+// Function to format the due date
+function formatDate(dueDate) {
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return new Date(dueDate).toLocaleDateString(undefined, options);
+}
+
+// Function to get the difference in days between two dates
+function getDaysDifference(date1, date2) {
+  const oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
+  return Math.round(Math.abs((date1 - date2) / oneDay));
+}
+
+// Function to format due date and display message
+function getDueDate(dueDate) {
+  const formattedDueDate = formatDate(dueDate);
+  const now = new Date();
+  const dueDateObj = new Date(dueDate);
+
+  const daysDifference = getDaysDifference(dueDateObj, now);
+
+  if (daysDifference <= 7) {
+    return `Due in ${daysDifference} days`;
+  } else {
+    return formattedDueDate;
+  }
+}
+
 const port = process.env.PORT || 3000;
 
 http.createServer(async function (req, res) {
@@ -57,7 +84,7 @@ http.createServer(async function (req, res) {
                                 <div class = "taskCardHeader textStyle">
                                     <div class = "taskHeading">${ele.taskName}</div>
                                     <div class = "headingEle">
-                                        <div class="headingDate">${ele.dueDate}</div>
+                                        <div class="headingDate">${getDueDate(ele.dueDate)}</div>
                                         <div id="threeDotsKebabMenu" class="kebab-menu">
                                             <div class="dot"></div>
                                             <div class="dot"></div>
