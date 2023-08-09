@@ -188,6 +188,15 @@ http.createServer(async function (req, res) {
                           
                           bodyHeading.innerHTML = "Create New Task";
                       }
+                      function closeForm() {
+                          var bodyContainer = document.getElementById('bodyContainer');
+                          var editForm = document.getElementById('editForm');
+                          var bodyHeading = document.getElementById('bodyHeading');
+                  
+                          bodyContainer.classList.remove('hidden');
+                          editForm.classList.add('hidden');
+                          bodyHeading.innerHTML = "Current Tasks";
+                      }
                   </script>
                   </html>`;
           }
