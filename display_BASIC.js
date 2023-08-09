@@ -97,7 +97,7 @@ http.createServer(async function (req, res) {
             taskCardEle += `<div id = "card${index}" class = "taskCard">
                                 <div class = "taskCardHeader textStyle">
                                     <div class = "taskHeading">
-                                      <span>${getPriorityLevel(ele.priorityLevel)}  </sapn>
+                                      <span>${getPriorityLevel(ele.priorityLevel)}  </span>
                                       <span>${ele.taskName}</span>
                                     </div>
                                     <div class = "headingEle">
@@ -343,7 +343,7 @@ http.createServer(async function (req, res) {
             taskCardEle += `<div id = "card${index}" class = "taskCard">
                                 <div class = "taskCardHeader textStyle">
                                     <div class = "taskHeading">
-                                      <span>${getPriorityLevel(ele.priorityLevel)}  </sapn>
+                                      <span>${getPriorityLevel(ele.priorityLevel)}  </span>
                                       <span>${ele.taskName}</span>
                                     </div>
                                     <div class = "headingEle">
