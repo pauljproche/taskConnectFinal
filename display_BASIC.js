@@ -177,6 +177,17 @@ http.createServer(async function (req, res) {
                         }
                         event.stopPropagation(); // Prevent the click event from propagating to the document
                       }
+                      function showEditForm() {
+                          var bodyContainer = document.getElementById('bodyContainer');
+                          var editForm = document.getElementById('editForm');
+                          
+                          var bodyHeading = document.getElementById('bodyHeading');
+                  
+                          bodyContainer.classList.add('hidden');
+                          editForm.classList.remove('hidden');
+                          
+                          bodyHeading.innerHTML = "Create New Task";
+                      }
                   </script>
                   </html>`;
           }
