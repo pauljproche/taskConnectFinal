@@ -37,30 +37,30 @@
         padding: 10px;
     } */
     nav {
-        display: flex;
+        position: fixed; /* Fix the nav bar position */
+        top: 0; /* Place it at the top of the viewport */
+        left: 0; /* Align it to the left */
+        width: 100%; /* Extend it across the entire viewport width */
         background-color: #EAEAEA;
+        display: flex;
+        justify-content: space-between; /* Spread items across the space */
         align-items: center;
-        /*vert align*/
-        justify-content: flex-end;
-        /*makes nav ele. right aligned*/
-        white-space: nowrap;
+        padding: 10px 20px; /* Add padding for better aesthetics */
+        z-index: 1000; /* Ensure it's above other content */
     }
-
-    nav li {
-        padding-right: 20px;
-        display: inline;
-        /*horizontal align*/
+    .iconContainer {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
     }
-
-    .logo {
-        padding-left: 20px;
-        margin-right: auto;
-        /*make logo left aligned*/
+    .iconContainer li {
+        margin-right: 20px; /* Add spacing between icons */
     }
-
     .icon {
-        height: 35px;
-        width: 35px;
+        height: 50px; /* Increase icon size */
+        width: 50px;
     }
 
     .settingIcon {
