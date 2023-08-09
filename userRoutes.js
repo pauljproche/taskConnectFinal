@@ -13,6 +13,6 @@ router.route('/updateUsername').post(protect, updateUsername);
 router.route('/updatePassword').post(protect, updatePassword);
 
 // Register a new user
-router.route('/register').post(registerUser);
+router.route('/register').post(protect, registerUser);
 
 module.exports = router;
