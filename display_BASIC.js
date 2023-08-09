@@ -155,11 +155,7 @@ http.createServer(async function (req, res) {
                     <title>TaskConnect - Front Page</title>
                 </head>
                 <body>
-                    ${htmlContent}
-                    <div>
-                      <h2>Query Results:</h2>
-                      <pre>${queryResult2String}</pre>
-                    </div>  
+                    ${htmlContent}  
                 </body>
                 </html>`;
           } else {
@@ -173,10 +169,6 @@ http.createServer(async function (req, res) {
                   </head>
                   <body>
                       ${htmlContent}
-                      <div>
-                        <h2>Query Results1:</h2>
-                        <pre>${queryResult1String}</pre>
-                      </div>
                   </body>
                   <script>
                       var openMenuIdArr = [];
