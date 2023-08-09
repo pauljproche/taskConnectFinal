@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb');
 const http = require('http');
 const fs = require('fs');
+const qs = require('querystring');
 
 const uri = "mongodb+srv://taskconnect2:V02gss7wWBeSd47M@cluster0.szozfpl.mongodb.net/?retryWrites=true&w=majority";
 
@@ -385,6 +386,44 @@ http.createServer(async function (req, res) {
         res.writeHead(500, { 'Content-Type': 'text/html' });
         res.end("An error occurred while processing the request.");
     }
+} else if (req.method === 'POST' && req.url === '/saveTask') {
+  let formData = '';
+  req.on('data', chunk => {
+      formData += chunk.toString();
+  });
+
+  req.on('end', async () => {
+      if(formData){
+          const parsedData = qs.parse(formData);
+          try {
+              const client = new MongoClient(uri);
+              await client.connect();
+              const database = client.db("taskConnect");
+              const collection = database.collection("taskCard");
+              const dueDate = parsedData.dueDate ? new Date(parsedData.dueDate) : new Date();
+              const newTask = {
+                  taskName: parsedData.taskName,
+                  dueDate: dueDate,
+                  priorityLevel: parsedData.priorityLevel ? parsedData.priorityLevel : 0,
+                  taskStatus: parsedData.taskStatus ? parsedData.taskStatus : false,
+                  isSubTask: parsedData.isSubTask ? parsedData.isSubTask : false,
+                  description:parsedData.description,
+                  subtasks: parsedData.isSubTask ? [""] : [] 
+              };
+      
+              await collection.insertOne(newTask);
+              await client.close();
+      
+              // Respond to the client
+              res.writeHead(302, { 'Location': '/home' }); // Redirect to homepage
+              res.end();
+          } catch (err) {
+              console.log("Error inserting data into MongoDB:", err);
+              res.writeHead(500, { 'Content-Type': 'text/html' });
+              res.end("An error occurred while processing the request.");
+          }
+      }
+  });
 } else {
     res.writeHead(404, { 'Content-Type': 'text/html' });
     res.end("Page not found.");
