@@ -292,31 +292,16 @@ http.createServer(async function (req, res) {
       }
     });
   } else if (req.url === '/createProfileFromSettings') {
-      if (req.method === 'POST') {
-        let requestBody = '';
-
-        req.on('data', chunk => {
-            requestBody += chunk.toString();
-        });
-
-        req.on('end', async () => {
-            try {
-                const formData = new URLSearchParams(requestBody);
-                const fullName = formData.get('fullname');
-                const age = formData.get('age');
-                const email = formData.get('email');
-
-                // Insert data into MongoDB collection or perform actions
-                // ...
-
-                res.writeHead(302, { 'Location': '/profilepage' });
-                res.end();
-            } catch (err) {
-                console.log("Error:", err);
-                res.writeHead(500, { 'Content-Type': 'text/html' });
-                res.end("An error occurred.");
-            }
-        });
+      fs.readFile('create_profile.html', 'utf8', (err, settingsHtmlContent) => {
+        if (err) {
+          console.log("Error reading create_profile.html:", err);
+          res.writeHead(500, { 'Content-Type': 'text/html' });
+          res.end("An error occurred while processing the request.");
+        } else {
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.end(settingsHtmlContent);
+        }
+      });
     } else {
         res.writeHead(405, { 'Content-Type': 'text/html' });
         res.end("Method not allowed.");
