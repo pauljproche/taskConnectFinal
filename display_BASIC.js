@@ -158,12 +158,18 @@ http.createServer(async function (req, res) {
                   </body>
                   <script>
                     const queryResult2Array = ${queryResult2String};
+                    
                     document.getElementById('rightNav').innerHTML = "<h2> " + queryResult2Array[0].name + " Friend's: </h2><br/>";
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].occupation[0];
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0].name;
                     document.getElementById('cardContainer').innerHTML = ${JSON.stringify(taskCardEle)};
-                    document.getElementById('leftNav').innerHTML = "Task Analytics <br/>";
+
+                    const queryResult1Array = ${queryResult1String};
+
+                    document.getElementById('leftNav').innerHTML = "<h2> Task Analytics </h2><br/>";
                     document.getElementById('leftNav').innerHTML += queryResult2Array[0].follower[0].name;
+                    document.getElementById('leftNav').innerHTML += queryResult1Array[0].taskName;
+
                   </script>
                   </html>`;
           }
