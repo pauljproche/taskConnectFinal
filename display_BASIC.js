@@ -97,7 +97,8 @@ http.createServer(async function (req, res) {
             taskCardEle += `<div id = "card${index}" class = "taskCard">
                                 <div class = "taskCardHeader textStyle">
                                     <div class = "taskHeading">
-                                      <span class = "red">${getPriorityLevel(ele.priorityLevel)}  </sapn>${ele.taskName}
+                                      <span>${getPriorityLevel(ele.priorityLevel)}  </sapn>
+                                      <span>${ele.taskName}</span>
                                     </div>
                                     <div class = "headingEle">
                                         <div class="headingDate">${getDueDate(ele.dueDate)}</div>
@@ -122,7 +123,7 @@ http.createServer(async function (req, res) {
                                         </div>
                                         <div id = "subTaskText${index}${ind}" class = "subTaskText">
                                             <label class = "textStyle font-20" for="checkbox1">${subEle.taskName}</label>
-                                            <input type="checkbox" id="checkbox${index}${ind}" class="checkbox" value = ${subEle.taskStatus}>
+                                            <input type="checkbox" id="checkbox${index}${ind}" class="checkbox" value = ${subEle.taskStatus} disabled>
                                         </div>
                                     </div>
                                     <div class = "subTaskRight">
