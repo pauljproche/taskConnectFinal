@@ -4,7 +4,7 @@ const User = require('../models/User'); // User model
 
 // Register a new user
 async function registerUser(req, res) {
-    const { username, email, password } = req.body;
+    const { name, username, email, password } = req.body;
     
     try {
         // Check if a user with the provided email already exists
@@ -16,6 +16,7 @@ async function registerUser(req, res) {
         // Create a new user document
         const newUser = new User({
             googleId,
+            name,
             username,
             email,
             password // Hash the password before saving it
