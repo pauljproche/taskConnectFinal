@@ -155,6 +155,7 @@ http.createServer(async function (req, res) {
                       </div>
                   </body>
                   <script>
+                      var openMenuIdArr = [];
                       const queryResult2Array = ${queryResult2String};
                       document.getElementById('rightNav').innerHTML = "<h2> " + queryResult2Array[0].name + " Friend's: </h2><br/>";
                       document.getElementById('rightNav').innerHTML += queryResult2Array[0].occupation[0];
@@ -165,7 +166,6 @@ http.createServer(async function (req, res) {
                       function toggleMenu(event) {
                         var eventId = event.currentTarget.id;
                         var id;
-                        var openMenuIdArr = [];
                         if(eventId.includes("threeDotsKebabMenu")){
                             id = eventId.substring(18, eventId.length);
                         }     
