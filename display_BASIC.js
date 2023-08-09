@@ -164,6 +164,21 @@ http.createServer(async function (req, res) {
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0].name;
                     document.getElementById('cardContainer').innerHTML = ${JSON.stringify(taskCardEle)};
 
+                    /*
+                    //Loop and display every friend information content
+                    let rightNavContent = "";
+                    queryResult2Array.forEach(userProfile => {
+                        rightNavContent += "<h2>" + userProfile.name + " Friend's: </h2><br/>";
+                        userProfile.occupation.forEach(occupation => {
+                          rightNavContent += occupation + "<br/>";
+                        });
+                        userProfile.follower.forEach(follower => {
+                          rightNavContent += follower.name + "<br/>";
+                        });
+                    });
+                    */
+                    
+                    document.getElementById('rightNav').innerHTML = rightNavContent;
                     const queryResult1Array = ${queryResult1String};
 
                     document.getElementById('leftNav').innerHTML = "<h2> Task Analytics </h2><br/>";
@@ -171,6 +186,20 @@ http.createServer(async function (req, res) {
                     document.getElementById('leftNav').innerHTML += queryResult1Array[0].taskName + "<br/>";
                     document.getElementById('leftNav').innerHTML += queryResult1Array[0].dueDate + "<br/>";
                     //document.getElementById('leftNav').innerHTML += "Completion Status: " + queryResult1Array[0].isSubTask + "<br/>";
+
+                    /*
+                    let rightNavContent = "";
+                    queryResult2Array.forEach(userProfile => {
+                        rightNavContent += "<h2>" + userProfile.name + " Friend's: </h2><br/>";
+                        userProfile.occupation.forEach(occupation => {
+                          rightNavContent += occupation + "<br/>";
+                        });
+                        userProfile.follower.forEach(follower => {
+                          rightNavContent += follower.name + "<br/>";
+                        });
+                    });
+                    document.getElementById('rightNav').innerHTML = rightNavContent;
+                    */
                   </script>
                   </html>`;
           }
