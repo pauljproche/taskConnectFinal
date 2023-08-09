@@ -76,8 +76,7 @@ http.createServer(async function (req, res) {
                   </body>
                   <script>
                     const queryResult2Array = ${queryResult2String};
-                    document.getElementById('rightNav').innerHTML = "<h2>";
-                    document.getElementById('rightNav').innerHTML += queryResult2Array[0].name;
+                    document.getElementById('rightNav').innerHTML = "<h2>" + "queryResult2Array[0].name" + "<h2/>";
                     document.getElementById('rightNav').innerHTML += " Friend's List: </h2>";
                     document.getElementById('rightNav').innerHTML += "<br/>";
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].occupation[0];
