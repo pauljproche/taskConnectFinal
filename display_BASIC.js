@@ -209,7 +209,10 @@ http.createServer(async function (req, res) {
                               }
                             })
                             openMenuIdArr = [];
-                          } 
+                          }
+                          // Reset the form fields
+                          var form = editForm.querySelector('form');
+                          form.reset(); 
                       }
                       function closeForm() {
                           var bodyContainer = document.getElementById('bodyContainer');
@@ -219,6 +222,9 @@ http.createServer(async function (req, res) {
                           bodyContainer.classList.remove('hidden');
                           editForm.classList.add('hidden');
                           bodyHeading.innerHTML = "Current Tasks";
+                          // Reset the form fields
+                          var form = editForm.querySelector('form');
+                          form.reset(); 
                       }
                   </script>
                   </html>`;
