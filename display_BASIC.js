@@ -1,7 +1,6 @@
 const { MongoClient } = require('mongodb');
 const http = require('http');
 const fs = require('fs');
-const { getPriority } = require('os');
 
 const uri = "mongodb+srv://taskconnect2:V02gss7wWBeSd47M@cluster0.szozfpl.mongodb.net/?retryWrites=true&w=majority";
 
@@ -85,12 +84,12 @@ http.createServer(async function (req, res) {
                                     <div class = "taskHeading">${ele.taskName}</div>
                                     <div class = "headingEle">
                                         <div class="headingDate">${getDueDate(ele.dueDate)}</div>
-                                        <div id="threeDotsKebabMenu" class="kebab-menu">
+                                        <div id="threeDotsKebabMenu${index}" class="kebab-menu">
                                             <div class="dot"></div>
                                             <div class="dot"></div>
                                             <div class="dot"></div>
                                         </div>
-                                        <div id="menuItems" class="menu-items hidden">
+                                        <div id="menuItems${index}" class="menu-items hidden">
                                             <div class="menu-item" onclick="showEditForm()">Edit Task</div>
                                         </div>
                                     </div>
@@ -158,12 +157,22 @@ http.createServer(async function (req, res) {
                   </body>
                   <script>
                     const queryResult2Array = ${queryResult2String};
-
-                    document.getElementById('rightNav').innerHTML += "<h2> " + queryResult2Array[0].name + " Friend's: </h2><br/>";
+                    document.getElementById('rightNav').innerHTML = "<h2> " + queryResult2Array[0].name + " Friend's: </h2><br/>";
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].occupation[0];
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0].name;
                     document.getElementById('cardContainer').innerHTML = ${JSON.stringify(taskCardEle)};
-                    
+                    document.getElementById('leftNav').innerHTML = "Task Analytics <br/>";
+                    document.getElementById('leftNav').innerHTML += queryResult2Array[0].follower[0].name;
+                    function toggleMenu(event) {
+                      var eventId = event.currentTarget.id;
+                      var id;
+                      if(eventId.includes("threeDotsKebabMenu")){
+                          id = eventId.substring(18, eventId.length);
+                      }
+                      var menuItems = document.getElementById("menuItems"+id);
+                      menuItems.classList.toggle('hidden');
+                      event.stopPropagation(); // Prevent the click event from propagating to the document
+                  }
                   </script>
                   </html>`;
           }
