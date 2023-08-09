@@ -90,6 +90,36 @@
         margin-bottom: 10px; /*adds space b/w form inputs*/
         border: 1px solid #ccc;
     }
+    .links {
+        white-space: nowrap; /* Prevent line breaks */
+        font-size: 16px;
+    }
+      
+    .links a {
+        margin-right: 1px; /* Adjust this value to increase/decrease the space */
+    }
+    .logo {
+        padding-left: 20px;
+        margin-right: auto;
+        /*make logo left aligned*/
+    }
+    .icon {
+        height: 35px;
+        width: 35px;
+    }
+    .iconContainer {
+        display: flex;
+        align-items: center;
+    }
+    @media (max-width: 600px) {
+        /*hide these elements*/
+        .signup-form {
+            align-items: flex-start; 
+        }
+        .hide-on-small-screen {
+            display: none;
+        }
+    }
     </style>
 
     <script>
