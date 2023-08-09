@@ -181,12 +181,10 @@ http.createServer(async function (req, res) {
                   <script>
                       var openMenuIdArr = [];
                       const queryResult2Array = ${queryResult2String};
-                      document.getElementById('rightNav').innerHTML = "<h2> " + queryResult2Array[0].name + " Friend's: </h2><br/>";
-                      document.getElementById('rightNav').innerHTML += queryResult2Array[0].occupation[0];
+                      document.getElementById('rightNav').innerHTML = "<h2> Friend's List: </h2><br/>";
                       document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0].name;
                       document.getElementById('cardContainer').innerHTML = ${JSON.stringify(taskCardEle)};
-                      document.getElementById('leftNav').innerHTML = "Task Analytics <br/>";
-                      document.getElementById('leftNav').innerHTML += queryResult2Array[0].follower[0].name;
+
                       function toggleMenu(event) {
                         var eventId = event.currentTarget.id;
                         var id;
