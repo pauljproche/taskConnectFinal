@@ -291,7 +291,7 @@ http.createServer(async function (req, res) {
         res.end(signupHtmlContent);
       }
     });
-  } else if (req.url === '/createProfile') {
+  } else if (req.url === '/createProfileFromSettings') {
       if (req.method === 'POST') {
         let requestBody = '';
 
