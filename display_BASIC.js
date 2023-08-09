@@ -486,6 +486,46 @@ http.createServer(async function (req, res) {
           }
       }
   });
+// Inside your http.createServer function
+} else if (req.method === 'POST' && req.url === '/loginPage') {
+  let formData = '';
+  req.on('data', chunk => {
+      formData += chunk.toString();
+  });
+
+  req.on('end', async () => {
+      if (formData) {
+          const parsedData = qs.parse(formData);
+          try {
+              const client = new MongoClient(uri);
+              await client.connect();
+              const database = client.db("taskConnect");
+              const collection = database.collection("userProfile");
+
+              // Find the user by email and password
+              const user = await collection.findOne({
+                  email: parsedData.email,
+                  password: parsedData.password
+              });
+
+              await client.close();
+
+              if (user) {
+                  // User is authenticated, redirect to homepage or profile page
+                  res.writeHead(302, { 'Location': '/home' });
+                  res.end();
+              } else {
+                  // Invalid login credentials, redirect back to login page or show an error
+                  res.writeHead(302, { 'Location': '/loginpage' });
+                  res.end();
+              }
+          } catch (err) {
+              console.log("Error querying MongoDB:", err);
+              res.writeHead(500, { 'Content-Type': 'text/html' });
+              res.end("An error occurred while processing the request.");
+          }
+      }
+  });
 } else {
     res.writeHead(404, { 'Content-Type': 'text/html' });
     res.end("Page not found.");
