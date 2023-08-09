@@ -158,7 +158,9 @@ http.createServer(async function (req, res) {
                   </body>
                   <script>
                     const queryResult2Array = ${queryResult2String};
-                    
+                    const queryResult1Array = ${queryResult1String};
+                    document.getElementById('rightNav').innerHTML = "<h2> " + queryResult1Array[0].taskName + "</h2><br/>";
+
                     document.getElementById('rightNav').innerHTML = "<h2> " + queryResult2Array[0].name + " Friend's: </h2><br/>";
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].occupation[0];
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0].name;
