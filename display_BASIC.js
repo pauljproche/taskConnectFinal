@@ -108,7 +108,7 @@ http.createServer(async function (req, res) {
                                         </div>
                                     </div>
                                     <div class = "subTaskRight">
-                                        <div id = "subTaskDate${index}${ind}" class = "subTaskDate">${subEle.dueDate}</div>
+                                        <div id = "subTaskDate${index}${ind}" class = "subTaskDate">${getDueDate(subEle.dueDate)}</div>
                                         <div id="threeDotsSubTask${index}${ind}" class="kebab-menu">
                                             <div class="dot"></div>
                                             <div class="dot"></div>
