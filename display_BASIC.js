@@ -97,7 +97,7 @@ http.createServer(async function (req, res) {
             taskCardEle += `<div id = "card${index}" class = "taskCard">
                                 <div class = "taskCardHeader textStyle">
                                     <div class = "taskHeading">
-                                      <span>${getPriorityLevel(ele.priorityLevel)}  </sapn>${ele.taskName}
+                                      <span class = "red">${getPriorityLevel(ele.priorityLevel)}  </sapn>${ele.taskName}
                                     </div>
                                     <div class = "headingEle">
                                         <div class="headingDate">${getDueDate(ele.dueDate)}</div>
@@ -280,29 +280,44 @@ http.createServer(async function (req, res) {
         res.end(loginHtmlContent);
       }
     });
-  } else if (req.url === '/about') {
-    fs.readFile('about.html', 'utf8', (err, aboutHtmlContent) => {
+  } else if (req.url === '/signuppage') {
+    fs.readFile('signuppage.html', 'utf8', (err, signupHtmlContent) => {
       if (err) {
-        console.log("Error reading about.html:", err);
+        console.log("Error reading signuppage.html:", err);
         res.writeHead(500, { 'Content-Type': 'text/html' });
         res.end("An error occurred while processing the request.");
       } else {
         res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(aboutHtmlContent);
+        res.end(signupHtmlContent);
       }
     });
   } else if (req.url === '/createProfile') {
-    fs.readFile('create_profile.html', 'utf8', (err, aboutHtmlContent) => {
-      if (err) {
-        console.log("Error reading about.html:", err);
-        res.writeHead(500, { 'Content-Type': 'text/html' });
-        res.end("An error occurred while processing the request.");
-      } else {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(aboutHtmlContent);
-      }
-    });
-  } else {
+      if (req.method === 'POST') {
+        let requestBody = '';
+
+        req.on('data', chunk => {
+            requestBody += chunk.toString();
+        });
+
+        req.on('end', async () => {
+            try {
+                const formData = new URLSearchParams(requestBody);
+                const fullName = formData.get('fullname');
+                const age = formData.get('age');
+                const email = formData.get('email');
+
+                // Insert data into MongoDB collection or perform actions
+                // ...
+
+                res.writeHead(302, { 'Location': '/profilepage' });
+                res.end();
+            } catch (err) {
+                console.log("Error:", err);
+                res.writeHead(500, { 'Content-Type': 'text/html' });
+                res.end("An error occurred.");
+            }
+        });
+    } else {
         res.writeHead(405, { 'Content-Type': 'text/html' });
         res.end("Method not allowed.");
     }
