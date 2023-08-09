@@ -79,7 +79,7 @@ http.createServer(async function (req, res) {
                     const queryResult2Array = ${queryResult2String};
                     document.getElementById('rightNav').innerHTML = queryResult2Array[0].name;
                     document.getElementById('rightNav').innerHTML += "<br/>";
-                    document.getElementById('rightNav').innerHTML += queryResult2Array[0].age;
+                    document.getElementById('rightNav').innerHTML += queryResult2Array[0].occupation[0];
                     document.getElementById('rightNav').innerHTML += "<br/>";
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0].name;
 
