@@ -12,22 +12,25 @@ async function registerUser(req, res) {
         if (existingUser) {
             return res.status(400).json({ success: false, message: 'Email already registered' });
         }
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
         
         // Create a new user document
         const newUser = new User({
-            googleId,
             name,
             username,
             email,
-            password // Hash the password before saving it
+            password: hashedPassword // Use the hashed password here
         });
         
         // Save the user document to the database
         await newUser.save();
        
-        res.redirect('https://taskconnect12345-e825a4493aff.herokuapp.com/home'); 
+        res.json({ success: true, message: 'User registered successfully!' }); 
 
     } catch (error) {
+        console.error("Error while registering user: ", error);
         res.status(500).json({ success: false, message: 'Error registering user' });
     }
 }
