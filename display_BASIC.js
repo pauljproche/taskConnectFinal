@@ -29,6 +29,21 @@ function getPriorityLevel(priorityLevel){
   else return "";
 }
 
+function getNumericPriorityLevel(priorityLevel){
+  const pLevel = priorityLevel ? priorityLevel.toLowerCase() : 0;
+  if(pLevel == 'low') return 1;
+  else if(pLevel == 'medium') return 2;
+  else if(pLevel == 'high') return 3;
+  else return 0;
+}
+
+function getTaskStaus(taskStatus){
+  const tStatus = taskStatus ? taskStatus.toLowerCase() : 0;
+  if(tStatus == 'complete') return true;
+  else if(tStatus == 'incomplete') return false;
+  else return false;
+}
+
 // Function to format the due date
 function formatDate(dueDate) {
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -326,7 +341,9 @@ http.createServer(async function (req, res) {
             let subtaskArr = ele.subtasks;
             taskCardEle += `<div id = "card${index}" class = "taskCard">
                                 <div class = "taskCardHeader textStyle">
-                                    <div class = "taskHeading">${ele.taskName}</div>
+                                    <div class = "taskHeading">
+                                      <span>${getPriorityLevel(ele.priorityLevel)}  </sapn>${ele.taskName}
+                                    </div>
                                     <div class = "headingEle">
                                         <div class="headingDate">${getDueDate(ele.dueDate)}</div>
                                         <div id="threeDotsKebabMenu${index}" class="kebab-menu">
@@ -404,12 +421,12 @@ http.createServer(async function (req, res) {
               await client.connect();
               const database = client.db("taskConnect");
               const collection = database.collection("taskCard");
-              const dueDate = parsedData.dueDate ? new Date(parsedData.dueDate) : new Date();
+              const dueDate = parsedData.dueDate ? new Date(parsedData.dueDate) : new Date();;
               const newTask = {
                   taskName: parsedData.taskName,
                   dueDate: dueDate,
-                  priorityLevel: parsedData.priorityLevel ? parsedData.priorityLevel : 0,
-                  taskStatus: parsedData.taskStatus ? parsedData.taskStatus : false,
+                  priorityLevel: getNumericPriorityLevel(parsedData.priorityLevel),
+                  taskStatus: getTaskStaus(parsedData.taskStatus),
                   isSubTask: parsedData.isSubTask ? parsedData.isSubTask : false,
                   description:parsedData.description,
                   subtasks: parsedData.isSubTask ? [""] : [] 
