@@ -54,7 +54,6 @@ function getDueDate(dueDate) {
     return formattedDueDate;
   }
 }
-
 const port = process.env.PORT || 3000;
 
 http.createServer(async function (req, res) {
@@ -166,17 +165,32 @@ http.createServer(async function (req, res) {
                       function toggleMenu(event) {
                         var eventId = event.currentTarget.id;
                         var id;
+                        var openMenuIdArr = [];
                         if(eventId.includes("threeDotsKebabMenu")){
                             id = eventId.substring(18, eventId.length);
                         }     
                         var menuItems = document.getElementById("menuItems"+id);
                         if (menuItems.classList.contains('hidden')) {
                             menuItems.classList.toggle('hidden'); // Show the menu items
+                            openMenuIdArr.push("menuItems"+id);
                         } else {
                             menuItems.classList.add('hidden'); // Hide the menu items
+                            openMenuIdArr.pop();
                         }
                         event.stopPropagation(); // Prevent the click event from propagating to the document
                       }
+
+                      document.addEventListener('click', function (event) {
+                          if(openMenuIdArr.length > 0){
+                            openMenuIdArr.forEach((ele,index) => {
+                              var menuItems = document.getElementById(ele);
+                              if (menuItems) {
+                                  menuItems.classList.add('hidden');
+                              }
+                            })
+                            openMenuIdArr = [];
+                          } 
+                      });
                       function showEditForm() {
                           var bodyContainer = document.getElementById('bodyContainer');
                           var editForm = document.getElementById('editForm');
@@ -187,6 +201,15 @@ http.createServer(async function (req, res) {
                           editForm.classList.remove('hidden');
                           
                           bodyHeading.innerHTML = "Create New Task";
+                          if(openMenuIdArr.length > 0){
+                            openMenuIdArr.forEach((ele,index) => {
+                              var menuItems = document.getElementById(ele);
+                              if (menuItems) {
+                                  menuItems.classList.add('hidden');
+                              }
+                            })
+                            openMenuIdArr = [];
+                          } 
                       }
                       function closeForm() {
                           var bodyContainer = document.getElementById('bodyContainer');
