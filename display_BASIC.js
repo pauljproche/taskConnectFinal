@@ -273,56 +273,34 @@ http.createServer(async function (req, res) {
     });
   } else if (req.url === '/createProfile') {
       if (req.method === 'POST') {
-          let requestBody = '';
-  
-          req.on('data', chunk => {
-              requestBody += chunk.toString();
-          });
-  
-          req.on('end', async () => {
-              try {
-                  const formData = new URLSearchParams(requestBody);
-                  const fullName = formData.get('fullname');
-                  const age = formData.get('age');
-                  const email = formData.get('email');
-  
-                  // You can now insert the data into the MongoDB collection or perform any desired actions.
-                  // For example:
-                  const client = new MongoClient(uri);
-  
-                  try {
-                      await client.connect();
-                      const database = client.db("taskConnect");
-                      const collection = database.collection("userProfile");
-  
-                      const insertResult = await collection.insertOne({
-                          fullName: fullName,
-                          age: age,
-                          email: email
-                      });
-  
-                      console.log("User profile created:", insertResult);
-  
-                      // Redirect to a success page or do any other necessary processing
-                      res.writeHead(302, { 'Location': '/profilepage' });
-                      res.end();
-                  } catch (err) {
-                      console.log("Error creating user profile:", err);
-                      res.writeHead(500, { 'Content-Type': 'text/html' });
-                      res.end("An error occurred while processing the request.");
-                  } finally {
-                      await client.close();
-                  }
-              } catch (err) {
-                  console.log("Error parsing form data:", err);
-                  res.writeHead(400, { 'Content-Type': 'text/html' });
-                  res.end("Bad request.");
-              }
-          });
-      } else {
-          res.writeHead(405, { 'Content-Type': 'text/html' });
-          res.end("Method not allowed.");
-      }
+        let requestBody = '';
+
+        req.on('data', chunk => {
+            requestBody += chunk.toString();
+        });
+
+        req.on('end', async () => {
+            try {
+                const formData = new URLSearchParams(requestBody);
+                const fullName = formData.get('fullname');
+                const age = formData.get('age');
+                const email = formData.get('email');
+
+                // Insert data into MongoDB collection or perform actions
+                // ...
+
+                res.writeHead(302, { 'Location': '/profilepage' });
+                res.end();
+            } catch (err) {
+                console.log("Error:", err);
+                res.writeHead(500, { 'Content-Type': 'text/html' });
+                res.end("An error occurred.");
+            }
+        });
+    } else {
+        res.writeHead(405, { 'Content-Type': 'text/html' });
+        res.end("Method not allowed.");
+    }
   } else if (req.url === '/settings') {
     fs.readFile('settings.html', 'utf8', (err, settingsHtmlContent) => {
       if (err) {
