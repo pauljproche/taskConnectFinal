@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb');
 const http = require('http');
 const fs = require('fs');
+const { getPriority } = require('os');
 
 const uri = "mongodb+srv://taskconnect2:V02gss7wWBeSd47M@cluster0.szozfpl.mongodb.net/?retryWrites=true&w=majority";
 
@@ -19,6 +20,13 @@ async function run(collectionName) {
   } finally {
     await client.close();
   }
+}
+
+function getPriorityLevel(priorityLevel){
+  if(priorityLevel == 1) return "!";
+  else if(priorityLevel == 2) return "!!";
+  else if(priorityLevel == 2) return "!!!";
+  else return "";
 }
 
 const port = process.env.PORT || 3000;
@@ -42,6 +50,56 @@ http.createServer(async function (req, res) {
           res.end("An error occurred while processing the request.");
         } else {
           let htmlResponse;
+          let taskCardEle = '';
+          queryResult1.forEach((ele,index) => {
+            let subtaskArr = ele.subtasks;
+            taskCardEle += `<div id = "card${index}" class = "taskCard">
+                                <div class = "taskCardHeader textStyle">
+                                    <div class = "taskHeading">${ele.taskName}</div>
+                                    <div class = "headingEle">
+                                        <div class="headingDate">${ele.dueDate}</div>
+                                        <div id="threeDotsKebabMenu" class="kebab-menu">
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                        </div>
+                                        <div id="menuItems" class="menu-items hidden">
+                                            <div class="menu-item" onclick="showEditForm()">Edit Task</div>
+                                        </div>
+                                    </div>
+                                </div>`;
+            let subTaskEle = "";
+            if(subtaskArr.length > 0){  
+              subtaskArr.forEach((subEle,ind) => {          
+                subTaskEle += `<div class = "subtaskContainer">
+                                <div id = "subTask${index}${ind}" class = "subtask">
+                                    <div class = "subTaskLeft">
+                                        <div id = "priorityLevel${index}${ind}" class = "textStyle priorityLevel">${getPriorityLevel(subEle.priorityLevel)}</div>
+                                        <div id = "subTaskText${index}${ind}" class = "subTaskText">
+                                            <label class = "textStyle font-20" for="checkbox1">${subEle.taskName}</label>
+                                            <input type="checkbox" id="checkbox${index}${ind}" class="checkbox" value = ${subEle.taskStatus}>
+                                        </div>
+                                    </div>
+                                    <div class = "subTaskRight">
+                                        <div id = "subTaskDate${index}${ind}" class = "subTaskDate">${subEle.dueDate}</div>
+                                        <div id="threeDotsSubTask${index}${ind}" class="kebab-menu">
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                        </div>
+                                        <div id="subMenuItems${index}${ind}" class="menu-items hidden">
+                                            <div class="menu-item">Edit Subtask</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+              });
+            } else {
+              subTaskEle = `</div>`;
+            }
+            taskCardEle += subTaskEle;
+          });
           if (req.url === '/') {
             htmlResponse = `
                 <!DOCTYPE html>
@@ -54,11 +112,12 @@ http.createServer(async function (req, res) {
                     ${htmlContent}
                     <div>
                       <h2>Query Results:</h2>
-                      <p>${queryResult2String}</p>
+                      <pre>${queryResult2String}</pre>
                     </div>  
                 </body>
                 </html>`;
           } else {
+            // let htmlCon = htmlContent.replace('QUERY_RESULT_2_STRING_PLACEHOLDER', queryResult2String);
             htmlResponse = `
                   <!DOCTYPE html>
                   <html>
@@ -71,7 +130,6 @@ http.createServer(async function (req, res) {
                       <div>
                         <h2>Query Results1:</h2>
                         <pre>${queryResult1String}</pre>
-                        <pre>${queryResult2String}</pre>
                       </div>
                   </body>
                   <script>
@@ -79,7 +137,7 @@ http.createServer(async function (req, res) {
                     document.getElementById('rightNav').innerHTML = "<h2>" + queryResult2Array[0].name + " Friend's: </h2><br/>";
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].occupation[0];
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0].name;
-
+                    document.getElementById('cardContainer').innerHTML = ${taskCardEle};
                   </script>
                   </html>`;
           }
