@@ -119,8 +119,7 @@ http.createServer(async function (req, res) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>`;
+                            </div>`;
               });
             }
             taskCardEle += subTaskEle + `</div>`;
