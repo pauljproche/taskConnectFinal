@@ -181,7 +181,7 @@ http.createServer(async function (req, res) {
                     */
 
                     
-                    const queryResult1Array = ${queryResult1String};
+                    //const queryResult1Array = ${queryResult1String};
 
                     
                     document.getElementById('leftNav').innerHTML = "<h2> Task Analytics </h2><br/>";
