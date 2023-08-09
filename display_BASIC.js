@@ -467,7 +467,8 @@ http.createServer(async function (req, res) {
               const collection = database.collection("userProfile");
               const newProfile = {
                   name: parsedData.username,
-                  email: parsedData.email
+                  email: parsedData.email,
+                  password: parsedData.password
               };
       
               await collection.insertOne(newProfile);
