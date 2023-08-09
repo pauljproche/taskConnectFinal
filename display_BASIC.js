@@ -478,7 +478,7 @@ http.createServer(async function (req, res) {
       }
   });
 // Inside your http.createServer function
-} else if (req.method === 'POST' && req.url === '/loginPage') {
+} else if (req.method === 'POST' && req.url === '/loginAuth') {
   let formData = '';
   req.on('data', chunk => {
       formData += chunk.toString();
