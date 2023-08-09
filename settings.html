@@ -13,82 +13,83 @@
      </script>
     <link href="toggleswitch.css" rel="stylesheet">
     <style>
-    .container {
-        margin-top: 3px; /*add the small margin at top*/
-        background-color:#2E4272;
+    body {
+        margin: 0;
+        background-color: #5B9F3C; /* Set background color for body */
+    }
+    nav {
         display: flex;
-        height: 100vh; /*spans 100% of vert. viewport*/
-        padding: 0px;
+        background-color: #5B9F3C;
+        align-items: center; /*vert align*/
+        justify-content: flex-end; /*makes nav ele. right aligned*/
+        white-space: nowrap; 
     }
-    .middle-col {
-        background-color:#ffffff;
-        flex-grow: 1;
-        padding: 20px;
-    }
-    .optionsSection {
-        padding: 10px;
+    nav li {
+        padding-right: 20px;
+        display: inline; /*horizontal align*/
     }
     a { 
         text-decoration: none;
-        color: #000000; 
+        color: #ffffff; 
     }
-    /* div {
+    .logo {
+        padding-left: 20px;
+        margin-right: auto; /*make logo left aligned*/
+    }
+    div {
         color: #000000;
         padding: 10px;
-    } */
-    nav {
-        position: fixed; /* Fix the nav bar position */
-        top: 0; /* Place it at the top of the viewport */
-        left: 0; /* Align it to the left */
-        width: 100%; /* Extend it across the entire viewport width */
-        background-color: #EAEAEA;
+    }
+    .container {
+        margin-top: 3px; /*add the small margin at top*/
+        background-image: linear-gradient(180deg, #5B9F3C, #E1C14F); /*gradient background*/
         display: flex;
-        justify-content: space-between; /* Spread items across the space */
+        height: 100vh; /*spans 100% of vert. viewport*/
+        padding: 0px;
+        font-size: 30px;
+        justify-content: center; 
         align-items: center;
-        padding: 10px 20px; /* Add padding for better aesthetics */
-        z-index: 1000; /* Ensure it's above other content */
-    }
-    .iconContainer {
-        display: flex;
-        align-items: center;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    .iconContainer li {
-        margin-right: 20px; /* Add spacing between icons */
-    }
-    .icon {
-        height: 50px; /* Increase icon size */
-        width: 50px;
-    }
-
-    .settingIcon {
-        width: 33px;
-        height: 30px;
-    }
-
-    .profileIcon {
-        height: 40px;
-        width: 40px;
+        overflow: hidden; /* Prevent scrolling */
     }
     .button {
-        margin-right: 10px;
-        border: 2px solid #000000; 
-        padding: 5px 10px; 
-        text-decoration: none; 
-        display: inline-block; 
+        background-color: #ff0000;
+        color: #ffffff;
+        padding: 10px 150px;
+        font-size: 18px;
         border-radius: 5px;
+        border: none;
     }
-    .currentEmail {
-        padding: 10px 50px;
+    .navbutton {
+        background-color: #ff0000;
+        color: #ffffff;
+        padding: 5px;
+        border-radius: 5px;
+    }       
+    .signup-form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column; /*waant the form inputs disp. vert.*/
+        align-items: flex-start;
+        flex: 1;
+    }   
+    .signup-input {
+        padding: 10px 150px;
         margin-bottom: 10px; /*adds space b/w form inputs*/
         border: 1px solid #ccc;
     }
-    .currentPassword {
-        padding: 10px 50px;
-        margin-bottom: 10px; /*adds space b/w form inputs*/
-        border: 1px solid #ccc;
+    .right-image {
+        top: 100px;
+        right: 0px;
+        height: 50vh;
+        padding: 10px;
+    }
+    .g_id_signin {
+        font-size: 16px;
+        color: #000000;
+        padding: 10px 150px;
+    }
+    .title {
+        color: #ffffff
     }
     .links {
         white-space: nowrap; /* Prevent line breaks */
@@ -119,6 +120,16 @@
         .hide-on-small-screen {
             display: none;
         }
+    }
+    .currentEmail {
+        padding: 10px 50px;
+        margin-bottom: 10px; /*adds space b/w form inputs*/
+        border: 1px solid #ccc;
+    }
+    .currentPassword {
+        padding: 10px 50px;
+        margin-bottom: 10px; /*adds space b/w form inputs*/
+        border: 1px solid #ccc;
     }
     </style>
 
