@@ -290,7 +290,7 @@
         }
         .radioLabel {
             color: #000;
-            font-size: 18px;
+            font-size: 15px;
             border-radius: 20px;
             background: #FFF;
             box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.20);
@@ -305,7 +305,12 @@
         .cancel {
             float: right;
         }
-
+        .red {
+            color: #F00;
+        }
+        .mt-24 {
+            margin-top: 24px;
+        }
         @media (max-width: 600px) {
             /*hide these elements*/
             .hide-on-small-screen {
@@ -380,7 +385,7 @@
                         <input type="radio" id="none" name="priorityTask" value="None">
                         <label class = "radioLabel" for="none">None</label>
                         
-                        <div class = "textStyle choosePriority">Task Status</div>
+                        <div class = "textStyle choosePriority mt-24">Task Status</div>
                         <input type="radio" id="complete" name="completeStatus" value="Complete">
                         <label class = "radioLabel" for="complete">Complete</label>
                         <input type="radio" id="incomplete" name="incompleteStatus" value="Incomplete">
