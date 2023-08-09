@@ -468,7 +468,7 @@ http.createServer(async function (req, res) {
               const newProfile = {
                   username: parsedData.username,
                   age:  parsedData.age,
-                  name: parsedData.fullName,
+                  name: parsedData.fullname,
                   email: parsedData.email,
                   password: parsedData.password
               };
