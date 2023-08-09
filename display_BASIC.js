@@ -280,44 +280,29 @@ http.createServer(async function (req, res) {
         res.end(loginHtmlContent);
       }
     });
-  } else if (req.url === '/signuppage') {
-    fs.readFile('signuppage.html', 'utf8', (err, signupHtmlContent) => {
+  } else if (req.url === '/about') {
+    fs.readFile('about.html', 'utf8', (err, aboutHtmlContent) => {
       if (err) {
-        console.log("Error reading signuppage.html:", err);
+        console.log("Error reading about.html:", err);
         res.writeHead(500, { 'Content-Type': 'text/html' });
         res.end("An error occurred while processing the request.");
       } else {
         res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(signupHtmlContent);
+        res.end(aboutHtmlContent);
       }
     });
   } else if (req.url === '/createProfile') {
-      if (req.method === 'POST') {
-        let requestBody = '';
-
-        req.on('data', chunk => {
-            requestBody += chunk.toString();
-        });
-
-        req.on('end', async () => {
-            try {
-                const formData = new URLSearchParams(requestBody);
-                const fullName = formData.get('fullname');
-                const age = formData.get('age');
-                const email = formData.get('email');
-
-                // Insert data into MongoDB collection or perform actions
-                // ...
-
-                res.writeHead(302, { 'Location': '/profilepage' });
-                res.end();
-            } catch (err) {
-                console.log("Error:", err);
-                res.writeHead(500, { 'Content-Type': 'text/html' });
-                res.end("An error occurred.");
-            }
-        });
-    } else {
+    fs.readFile('create_profile.html', 'utf8', (err, aboutHtmlContent) => {
+      if (err) {
+        console.log("Error reading about.html:", err);
+        res.writeHead(500, { 'Content-Type': 'text/html' });
+        res.end("An error occurred while processing the request.");
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(aboutHtmlContent);
+      }
+    });
+  } else {
         res.writeHead(405, { 'Content-Type': 'text/html' });
         res.end("Method not allowed.");
     }
