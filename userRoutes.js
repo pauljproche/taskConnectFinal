@@ -4,15 +4,15 @@ const { protect } = require("../middleware/auth");
 const router = express.Router();
 
 // Update user's email
-router.route('/updateEmail').post(protect, updateUserEmail);
+router.route('/userControllers').post(protect, updateUserEmail);
 
 // Update user's username
-router.route('/updateUsername').post(protect, updateUsername);
+router.route('/userControllers').post(protect, updateUsername);
 
 // Update user's password
-router.route('/updatePassword').post(protect, updatePassword);
+router.route('/userControllers').post(protect, updatePassword);
 
 // Register a new user
-router.route('/register').post(registerUser);
+router.route('/userControllers').post(registerUser);
 
 module.exports = router;
