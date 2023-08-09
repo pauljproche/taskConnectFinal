@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings Page</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(function() {
-            debugger;
-           $("#header").load("Header.html");
-        });
-     </script>
     <link href="toggleswitch.css" rel="stylesheet">
     <style>
         .container {
@@ -125,97 +119,6 @@
         }
     }
     </style>
-
-    <script>
-        $(document).ready(function() {
-            // Edit icon for username
-            $(".editIcon.usernameIcon").on("click", function() {
-                const usernameElement = $(this).closest(".usernameContainer").find(".username");
-                const currentUsername = usernameElement.text();
-
-                const newUsername = prompt("Enter new username:", currentUsername);
-
-                if (newUsername !== null && newUsername !== "") {
-                    // Update the UI immediately
-                    usernameElement.text(newUsername);
-
-                    // Perform AJAX request to update the username on the server
-                    $.ajax({
-                        type: 'POST',
-                        url: '/updateUsername', //server route
-                        data: { newUsername },
-                        success: function(response) {
-                            if (response.success) {
-                                alert('Username updated successfully');
-                            } else {
-                                alert('Error updating username');
-                            }
-                        },
-                        error: function() {
-                            alert('An error occurred');
-                        }
-                    });
-                }
-            });
-
-            // Edit icon for email
-            $(".editIcon.emailIcon").on("click", function() {
-                const emailElement = $(this).closest(".emailContainer").find(".email");
-                const currentEmail = emailElement.text();
-
-                const newEmail = prompt("Enter new email:", currentEmail);
-
-                if (newEmail !== null && newEmail !== "") {
-                    // Update the UI immediately
-                    emailElement.text(newEmail);
-
-                    // Perform AJAX request to update the email on the server
-                    $.ajax({
-                        type: 'POST',
-                        url: '/updateEmail', // server route
-                        data: { newEmail },
-                        success: function(response) {
-                            if (response.success) {
-                                alert('Email updated successfully');
-                            } else {
-                                alert('Error updating email');
-                            }
-                        },
-                        error: function() {
-                            alert('An error occurred');
-                        }
-                    });
-                }
-            });
-
-            // Edit icon for password
-            $(".editIcon.passwordIcon").on("click", function() {
-                const passwordElement = $(this).closest(".passwordContainer").find(".password");
-                const currentPassword = passwordElement.text();
-
-                const newPassword = prompt("Enter new password:");
-
-                if (newPassword !== null && newPassword !== "") {
-                    // Perform AJAX request to update the password on the server
-                    $.ajax({
-                        type: 'POST',
-                        url: '/updatePassword', // server route
-                        data: { newPassword },
-                        success: function(response) {
-                            if (response.success) {
-                                alert('Password updated successfully');
-                            } else {
-                                alert('Error updating password');
-                            }
-                        },
-                        error: function() {
-                            alert('An error occurred');
-                        }
-                    });
-                }
-            });
-        });
-    </script>
 </head>
 <body>
 <div id="mainContainer">
@@ -266,30 +169,24 @@
                     <div class="profilePictureContainer">
                         <img class="profilePicture" src="current_picture.jpg" alt="Current Profile Picture">
                     </div>
-                    <!-- Add an input for file upload -->
                     <input type="file" id="profilePictureInput">
                 </div>
                 <div>
                     <h2>Edit Username</h2>
                     <div class="usernameContainer">
-                        <!-- Display the current username -->
                         <span class="username">johndoe</span>
-                        <!-- Edit icon to change username -->
-                        <span class="editIcon usernameIcon">&#9998;</span>
                     </div>
                 </div>
                 <div>
                     <h2>Change Email</h2>
                     <div class="emailContainer">
                         <span class="email">johndoe@example.com</span>
-                        <span class="editIcon emailIcon">&#9998;</span>
                     </div>
                 </div>
                 <div>
                     <h2>Change Password</h2>
                     <div class="passwordContainer">
                         <span class="password">*********</span>
-                        <span class="editIcon passwordIcon">&#9998;</span>
                     </div>
                 </div>
                 <div>
@@ -299,8 +196,6 @@
                 <div>
                     <h2>Share Activity</h2>
                     <label for="shareToggle">Share personal tasks with friend</label>
-                    <!-- <input type="checkbox" id="shareToggle"> -->
-                    <!-- Rounded switch -->
                     <label class="switch">
                       <input type="checkbox">
                       <span class="slider round"></span>
