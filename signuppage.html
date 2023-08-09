@@ -131,6 +131,15 @@
             <h2 class='title'style="margin-left: 5px;">Sign Up</h2>
             <div style="margin-left: 5px;">
                 <h1 class="title">Hello, Welcome!</h1>
+                <form  method="post" action="/saveProfile">
+                        <label for="username">User Name</label>
+                        <input type="text" id="username" name="username">
+                
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email">
+                
+                        <input type="submit" value="Add Task">
+                    </form>
                 <form method = "post" action = "/signuppage" class="signup-form" >
                     <input type="text" class="signup-input" placeholder="Email" required>
                     <input type="text" class="signup-input" placeholder="Password" required>
