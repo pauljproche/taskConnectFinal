@@ -84,7 +84,7 @@ http.createServer(async function (req, res) {
                                     <div class = "taskHeading">${ele.taskName}</div>
                                     <div class = "headingEle">
                                         <div class="headingDate">${getDueDate(ele.dueDate)}</div>
-                                        <div id="threeDotsKebabMenu${index}" class="kebab-menu">
+                                        <div id="threeDotsKebabMenu${index}" class="kebab-menu" onclick = "toggleMenu(event)">
                                             <div class="dot"></div>
                                             <div class="dot"></div>
                                             <div class="dot"></div>
