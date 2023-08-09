@@ -30,7 +30,37 @@
     <div class="container">
         <div class="middle-col">
             <h1>My Public Tasks (for Jane Doe)</h1>
-            <!-- TASKCARD INSERTION POINT -->
+            <div id = "bodyContainer">
+                    <div id = "cardContainer" class = "cardContainer">
+                    <!-- TASKCARD INSERTION POINT -->
+                    </div>
+                    <div class = "addTask" onclick = "showEditForm()"></div>
+                </div>
+                <div id = "editForm" class = "hidden editFormContainer">
+                    <div>
+                        <img class="crossIcon" src="https://pauljproche.github.io/taskConnectFinal/Images/cross.png" alt="cross icon" onclick = "closeForm()"/>
+                    </div>
+                    <form action="/saveTask.php">
+                        <label for="tName">Task Name</label>
+                        <input type="text" id="tName" name="taskName">
+                
+                        <label for="tDescription">Task Description</label>
+                        <input type="text" id="tDescription" name="taskDescription">
+                
+                        <div class = "textStyle choosePriority">Choose Priority</div>
+                        <input type="radio" id="low" name="priorityTask" value="Low">
+                        <label class = "radioLabel" for="low">Low <span class = "excSymbol">!</span></label>
+                        <input type="radio" id="medium" name="priorityTask" value="Medium">
+                        <label class = "radioLabel" for="medium">Medium <span class = "excSymbol">!!</span></label>
+                        <input type="radio" id="high" name="priorityTask" value="High">
+                        <label class = "radioLabel" for="high">High <span class = "excSymbol">!!!</span></label>
+                
+                        <label class = "dueDate" for="tDueDate">Due Date</label>
+                        <input type="date" id="tDueDate" name="dueDate">
+                        <input type="submit" value="Add Task">
+                        <input class = "cancel" type="button" value="Cancel" onclick = "closeForm()">
+                    </form>
+                </div>
         </div>
     </div>
 </body>
