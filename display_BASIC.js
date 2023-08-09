@@ -230,17 +230,79 @@ http.createServer(async function (req, res) {
       }
     });
   } else if (req.url === '/profilepage') {
-    fs.readFile('profilepage.html', 'utf8', (err, profileHtmlContent) => {
-      if (err) {
-        console.log("Error reading profilepage.html:", err);
+    try {
+        const queryResult1 = await run("taskCard");
+        let taskCardEle = '';
+        
+        queryResult1.forEach((ele, index) => {
+            let subtaskArr = ele.subtasks;
+            taskCardEle += `<div id = "card${index}" class = "taskCard">
+                                <div class = "taskCardHeader textStyle">
+                                    <div class = "taskHeading">${ele.taskName}</div>
+                                    <div class = "headingEle">
+                                        <div class="headingDate">${getDueDate(ele.dueDate)}</div>
+                                        <div id="threeDotsKebabMenu${index}" class="kebab-menu">
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                        </div>
+                                        <div id="menuItems${index}" class="menu-items hidden">
+                                            <div class="menu-item" onclick="showEditForm()">Edit Task</div>
+                                        </div>
+                                    </div>
+                                </div>`;
+            let subTaskEle = "";
+            if(subtaskArr.length > 0){  
+              subtaskArr.forEach((subEle, ind) => {          
+                subTaskEle += `<div class = "subtaskContainer">
+                                <div id = "subTask${index}${ind}" class = "subtask">
+                                    <div class = "subTaskLeft">
+                                        <div id = "priorityLevel${index}${ind}" class = "textStyle priorityLevel">${getPriorityLevel(subEle.priorityLevel)}</div>
+                                        <div id = "subTaskText${index}${ind}" class = "subTaskText">
+                                            <label class = "textStyle font-20" for="checkbox1">${subEle.taskName}</label>
+                                            <input type="checkbox" id="checkbox${index}${ind}" class="checkbox" value = ${subEle.taskStatus}>
+                                        </div>
+                                    </div>
+                                    <div class = "subTaskRight">
+                                        <div id = "subTaskDate${index}${ind}" class = "subTaskDate">${getDueDate(subEle.dueDate)}</div>
+                                        <div id="threeDotsSubTask${index}${ind}" class="kebab-menu">
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                        </div>
+                                        <div id="subMenuItems${index}${ind}" class="menu-items hidden">
+                                            <div class="menu-item">Edit Subtask</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+              });
+            }
+            taskCardEle += subTaskEle + `</div>`;
+        });
+
+        fs.readFile('profilepage.html', 'utf8', (err, profileHtmlContent) => {
+            if (err) {
+                console.log("Error reading profilepage.html:", err);
+                res.writeHead(500, { 'Content-Type': 'text/html' });
+                res.end("An error occurred while processing the request.");
+            } else {
+                // Splitting the profileHtmlContent at a specific marker (for this example, a comment) to create two parts
+                let parts = profileHtmlContent.split("<!-- TASKCARD INSERTION POINT -->");
+                
+                // Concatenating the header part, taskCardEle, and footer part
+                const finalHtml = parts[0] + taskCardEle + parts[1];
+
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                res.end(finalHtml);
+            }
+        });
+    } catch (err) {
+        console.log("Error processing profile page route:", err);
         res.writeHead(500, { 'Content-Type': 'text/html' });
         res.end("An error occurred while processing the request.");
-      } else {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(profileHtmlContent);
-      }
-    });
-  } else {
+    }
+} else {
     res.writeHead(404, { 'Content-Type': 'text/html' });
     res.end("Page not found.");
   }
