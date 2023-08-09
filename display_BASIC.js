@@ -322,7 +322,7 @@ http.createServer(async function (req, res) {
         res.writeHead(405, { 'Content-Type': 'text/html' });
         res.end("Method not allowed.");
     }
-  } else if (req.method === 'POST' && req.url === '/settings') {
+  } else if (req.url === '/settings') {
     fs.readFile('settings.html', 'utf8', (err, settingsHtmlContent) => {
       if (err) {
         console.log("Error reading settings.html:", err);
