@@ -464,19 +464,13 @@ http.createServer(async function (req, res) {
               const client = new MongoClient(uri);
               await client.connect();
               const database = client.db("taskConnect");
-              const collection = database.collection("taskCard");
-              const dueDate = parsedData.dueDate ? new Date(parsedData.dueDate) : new Date();;
-              const newTask = {
-                  taskName: parsedData.taskName,
-                  dueDate: dueDate,
-                  priorityLevel: getNumericPriorityLevel(parsedData.priorityLevel),
-                  taskStatus: getTaskStaus(parsedData.taskStatus),
-                  isSubTask: parsedData.isSubTask ? parsedData.isSubTask : false,
-                  description:parsedData.description,
-                  subtasks: parsedData.isSubTask ? [""] : [] 
+              const collection = database.collection("userProfile");
+              const newProfile = {
+                  name: parsedData.name,
+                  email: parsedData.email
               };
       
-              await collection.insertOne(newTask);
+              await collection.insertOne(newProfile);
               await client.close();
       
               // Respond to the client
