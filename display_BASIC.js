@@ -95,7 +95,7 @@ http.createServer(async function (req, res) {
                                     </div>
                                 </div>`;
             let subTaskEle = "";
-            if(subtaskArr.length > 0){  
+            if(subtaskArr.length > 0 && subtaskArr[0] != ""){  
               subtaskArr.forEach((subEle,ind) => {          
                 subTaskEle += `<div class = "subtaskContainer">
                                 <div id = "subTask${index}${ind}" class = "subtask">
@@ -256,7 +256,7 @@ http.createServer(async function (req, res) {
                                     </div>
                                 </div>`;
             let subTaskEle = "";
-            if(subtaskArr.length > 0){  
+            if(subtaskArr.length > 0 && subtaskArr[0] != ""){  
               subtaskArr.forEach((subEle, ind) => {          
                 subTaskEle += `<div class = "subtaskContainer">
                                 <div id = "subTask${index}${ind}" class = "subtask">
