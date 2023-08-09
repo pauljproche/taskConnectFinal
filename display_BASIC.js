@@ -291,6 +291,36 @@ http.createServer(async function (req, res) {
         res.end(signupHtmlContent);
       }
     });
+  } else if (req.url === '/createProfile') {
+      if (req.method === 'POST') {
+        let requestBody = '';
+
+        req.on('data', chunk => {
+            requestBody += chunk.toString();
+        });
+
+        req.on('end', async () => {
+            try {
+                const formData = new URLSearchParams(requestBody);
+                const fullName = formData.get('fullname');
+                const age = formData.get('age');
+                const email = formData.get('email');
+
+                // Insert data into MongoDB collection or perform actions
+                // ...
+
+                res.writeHead(302, { 'Location': '/profilepage' });
+                res.end();
+            } catch (err) {
+                console.log("Error:", err);
+                res.writeHead(500, { 'Content-Type': 'text/html' });
+                res.end("An error occurred.");
+            }
+        });
+    } else {
+        res.writeHead(405, { 'Content-Type': 'text/html' });
+        res.end("Method not allowed.");
+    }
   } else if (req.url === '/settings') {
     fs.readFile('settings.html', 'utf8', (err, settingsHtmlContent) => {
       if (err) {
@@ -312,7 +342,8 @@ http.createServer(async function (req, res) {
             taskCardEle += `<div id = "card${index}" class = "taskCard">
                                 <div class = "taskCardHeader textStyle">
                                     <div class = "taskHeading">
-                                      <span>${getPriorityLevel(ele.priorityLevel)}  </sapn>${ele.taskName}
+                                      <span>${getPriorityLevel(ele.priorityLevel)}  </sapn>
+                                      <span>${ele.taskName}</span>
                                     </div>
                                     <div class = "headingEle">
                                         <div class="headingDate">${getDueDate(ele.dueDate)}</div>
@@ -328,14 +359,15 @@ http.createServer(async function (req, res) {
                                 </div>`;
             let subTaskEle = "";
             if(subtaskArr.length > 0 && subtaskArr[0] != ""){  
-              subtaskArr.forEach((subEle, ind) => {          
+              subtaskArr.forEach((subEle, ind) => {      
+                let checkboxValue = subEle.taskStatus ? 'true' : 'false';    
                 subTaskEle += `<div class = "subtaskContainer">
                                 <div id = "subTask${index}${ind}" class = "subtask">
                                     <div class = "subTaskLeft">
                                         <div id = "priorityLevel${index}${ind}" class = "textStyle priorityLevel">${getPriorityLevel(subEle.priorityLevel)}</div>
                                         <div id = "subTaskText${index}${ind}" class = "subTaskText">
                                             <label class = "textStyle font-20" for="checkbox1">${subEle.taskName}</label>
-                                            <input type="checkbox" id="checkbox${index}${ind}" class="checkbox" value = ${subEle.taskStatus}>
+                                            <input type="checkbox" id="checkbox${index}${ind}" class="checkbox" value = ${checkboxValue} disabled>
                                         </div>
                                     </div>
                                     <div class = "subTaskRight">
