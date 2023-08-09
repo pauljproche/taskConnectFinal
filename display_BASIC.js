@@ -164,8 +164,8 @@ http.createServer(async function (req, res) {
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0].name;
                     document.getElementById('cardContainer').innerHTML = ${JSON.stringify(taskCardEle)};
 
-                    /*
-                    //!!!!!Loop and display every friend information content
+                    /*!!!!!
+                    //Loop and display every friend information content
                     let rightNavContent = "";
                     queryResult2Array.forEach(userProfile => {
                         rightNavContent += "<h2>" + userProfile.name + " Friend's: </h2><br/>";
@@ -177,15 +177,14 @@ http.createServer(async function (req, res) {
                         });
                     });
                     document.getElementById('rightNav').innerHTML = rightNavContent;
-                    //!!!!!
-                    */
+                    !!!!*/
 
                     
                     //const queryResult1Array = ${queryResult1String};
 
                     
-                    document.getElementById('leftNav').innerHTML = "<h2> Task Analytics </h2><br/>";
-                    document.getElementById('leftNav').innerHTML += <h3> Task 1 Progress: </h3><br/>";
+                    document.getElementById('rightNav').innerHTML = "<h2> Task Analytics </h2><br/>";
+                    document.getElementById('rightNav').innerHTML += <h3> Task 1 Progress: </h3><br/>";
                     /*
                     document.getElementById('leftNav').innerHTML += queryResult1Array[0].taskName + "<br/>";
                     
@@ -204,6 +203,7 @@ http.createServer(async function (req, res) {
                     });
                     document.getElementById('leftNav').innerHTML = leftNavContent;
                     !!!!!*/
+                    
                   </script>
                   </html>`;
           }
