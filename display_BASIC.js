@@ -177,16 +177,19 @@ http.createServer(async function (req, res) {
                         });
                     });
                     */
-                    
+
+                    /*
                     document.getElementById('rightNav').innerHTML = rightNavContent;
                     const queryResult1Array = ${queryResult1String};
 
+                    
                     document.getElementById('leftNav').innerHTML = "<h2> Task Analytics </h2><br/>";
                     document.getElementById('leftNav').innerHTML += <h3> Task 1 Progress: </h3><br/>";
                     document.getElementById('leftNav').innerHTML += queryResult1Array[0].taskName + "<br/>";
                     document.getElementById('leftNav').innerHTML += queryResult1Array[0].dueDate + "<br/>";
                     //document.getElementById('leftNav').innerHTML += "Completion Status: " + queryResult1Array[0].isSubTask + "<br/>";
-
+                    */
+                    
                     /*
                     let rightNavContent = "";
                     queryResult2Array.forEach(userProfile => {
