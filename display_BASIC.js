@@ -466,7 +466,9 @@ http.createServer(async function (req, res) {
               const database = client.db("taskConnect");
               const collection = database.collection("userProfile");
               const newProfile = {
-                  name: parsedData.username,
+                  username: parsedData.username,
+                  age:  parsedData.age,
+                  name: parsedData.fullName,
                   email: parsedData.email,
                   password: parsedData.password
               };
