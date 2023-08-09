@@ -3,12 +3,6 @@
 <head>
     <meta name = "viewport" charset = "utf-8" content = "width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- <script>
-        $(function() {
-           $("#header").load("Header.html");
-           $("#mainContent").load("currentTask.html");
-        });
-    </script> -->
     <title>TaskConnect</title>
     <style>
         body {
@@ -369,7 +363,7 @@
                     <div>
                         <img class="crossIcon" src="https://pauljproche.github.io/taskConnectFinal/Images/cross.png" alt="cross icon" onclick = "closeForm()"/>
                     </div>
-                    <form action="/saveTask.php">
+                    <form  method="post" action="/saveTask">
                         <label for="tName">Task Name</label>
                         <input type="text" id="tName" name="taskName">
                 
