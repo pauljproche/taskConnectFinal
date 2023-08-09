@@ -5,9 +5,8 @@
   "name": "mongoaltas-nodejs",
   "version": "1.0.0",
   "main": "display_BASIC.js",
-  "devDependencies": {},
   "scripts": {
-    "start": "node display_BASIC.js" 
+    "start": "node display_BASIC.js"
   },
   "author": "",
   "license": "ISC",
