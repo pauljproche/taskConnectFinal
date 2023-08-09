@@ -117,65 +117,91 @@
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul class="logo iconContainer">
-                <li><a href="/">
-                    <img class="icon" src="https://pauljproche.github.io/taskConnectFinal/Images/logo.png" alt="company logo" />
-                </a></li>
-                <li class="hide-on-small-screen"><a href="/home">TaskConnect</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div class="container">
-        <div>
-            <h2 class='title'style="margin-left: 5px;">Sign Up</h2>
-            <div style="margin-left: 5px;">
-                <h1 class="title">Hello, Welcome!</h1>
-                <form class="signup-form" action="/register" method="post">
-                    <input type="text" class="signup-input" placeholder="Full Name" name="firstandlastname" required>
-                    <input type="text" class="signup-input" placeholder="Email" name="email" required>
-                    <input type="text" class="signup-input" placeholder="Username" name="username" required>
-                    <input type="password" class="signup-input" placeholder="Password" name="password" required>
-                    <input type="submit" class="button" value="Sign Up with Email">
-                            <!-- Google "Sign in with Google" button container -->
-                    <div class="g_id_signin"
-                        data-client_id="434361129103-hkuonu5rhorgcv26dglqs902dnqlnkho.apps.googleusercontent.com"
-                        data-login_uri="https://taskconnect12345-e825a4493aff.herokuapp.com/"
-                        data-auto_prompt="false"
-                        data-type="standard"
-                        data-size="large"
-                        data-theme="outline"
-                        data-text="sign_in_with"
-                        data-shape="rectangular"
-                        data-logo_alignment="left">
-                    </div>
-                    </form>
-                    <p class="links">
-                        <a href="#">Already have an account?</a>
-                        <a href="/loginpage">Log in</a>
-                    </p>
+    <div id="mainContainer">
+        <header id="header">
+            <nav>
+                <ul class="logo iconContainer">
+                    <li><a href="/">
+                        <img class="icon" src="https://pauljproche.github.io/taskConnectFinal/Images/logo.png" alt="company logo" />
+                    </a></li>
+                    <!-- <li><a href="#">Friends</a></li>
+                    <li class="hide-on-small-screen"><a href="#">Challenges</a></li> -->
+                </ul>
+        
+                <ul class="iconContainer">
+                    <li class="hide-on-small-screen">
+                        <a href="/home">
+                            <img class="icon" src="https://pauljproche.github.io/taskConnectFinal/Images/homeIcon.png" alt="Home Icon" />
+                        </a>
+                    </li>
+                    <!-- <li class="hide-on-small-screen">
+                        <a href="#">
+                            <img class="icon" src="Images/DoorbellIcon.png" alt="Notifications" />
+                        </a>
+                    </li> -->
+                    <li class="hide-on-small-screen">
+                        <a href="/settings">
+                            <img class="settingIcon" src="https://pauljproche.github.io/taskConnectFinal/Images/settingIcon.png" alt="Settings" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/profilepage">
+                            <img class="profileIcon" src="https://pauljproche.github.io/taskConnectFinal/Images/profileIcon.png" alt="Profile" />
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <div class="container">
+            <div>
+                <h2 class='title'style="margin-left: 5px;">Sign Up</h2>
+                <div style="margin-left: 5px;">
+                    <h1 class="title">Hello, Welcome!</h1>
+                    <form class="signup-form" action="/register" method="post">
+                        <input type="text" class="signup-input" placeholder="Full Name" name="firstandlastname" required>
+                        <input type="text" class="signup-input" placeholder="Email" name="email" required>
+                        <input type="text" class="signup-input" placeholder="Username" name="username" required>
+                        <input type="password" class="signup-input" placeholder="Password" name="password" required>
+                        <input type="submit" class="button" value="Sign Up with Email">
+                                <!-- Google "Sign in with Google" button container -->
+                        <div class="g_id_signin"
+                            data-client_id="434361129103-hkuonu5rhorgcv26dglqs902dnqlnkho.apps.googleusercontent.com"
+                            data-login_uri="https://taskconnect12345-e825a4493aff.herokuapp.com/"
+                            data-auto_prompt="false"
+                            data-type="standard"
+                            data-size="large"
+                            data-theme="outline"
+                            data-text="sign_in_with"
+                            data-shape="rectangular"
+                            data-logo_alignment="left">
+                        </div>
+                        </form>
+                        <p class="links">
+                            <a href="#">Already have an account?</a>
+                            <a href="/loginpage">Log in</a>
+                        </p>
+                </div>
             </div>
+            <img src="https://pauljproche.github.io/taskConnectFinal/Images/signuppage.png" alt="Image" class="right-image">
         </div>
-        <img src="https://pauljproche.github.io/taskConnectFinal/Images/signuppage.png" alt="Image" class="right-image">
+        <script>
+            window.onload = function() {
+                google.accounts.id.initialize({
+                    client_id: "434361129103-hkuonu5rhorgcv26dglqs902dnqlnkho.apps.googleusercontent.com",
+                    callback: handleCredentialResponse,
+                });
+                google.accounts.id.renderButton(
+                    document.querySelector(".g_id_signin"),
+                    { theme: "outline", size: "large" } // customization attributes
+                );
+                google.accounts.id.prompt(); 
+            };
+    
+            function handleCredentialResponse(response) {
+                console.log("Encoded JWT ID token: " + response.credential);
+            }
+        </script>
     </div>
-    <script>
-        window.onload = function() {
-            google.accounts.id.initialize({
-                client_id: "434361129103-hkuonu5rhorgcv26dglqs902dnqlnkho.apps.googleusercontent.com",
-                callback: handleCredentialResponse,
-            });
-            google.accounts.id.renderButton(
-                document.querySelector(".g_id_signin"),
-                { theme: "outline", size: "large" } // customization attributes
-            );
-            google.accounts.id.prompt(); 
-        };
-
-        function handleCredentialResponse(response) {
-            console.log("Encoded JWT ID token: " + response.credential);
-        }
-    </script>
 </body>
 </html> 
 
