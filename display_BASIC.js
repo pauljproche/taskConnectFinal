@@ -81,7 +81,9 @@ http.createServer(async function (req, res) {
             let subtaskArr = ele.subtasks;
             taskCardEle += `<div id = "card${index}" class = "taskCard">
                                 <div class = "taskCardHeader textStyle">
-                                    <div class = "taskHeading">${ele.taskName}</div>
+                                    <div class = "taskHeading">
+                                      <span>${getPriorityLevel(ele.priorityLevel)}  </sapn>${ele.taskName}
+                                    </div>
                                     <div class = "headingEle">
                                         <div class="headingDate">${getDueDate(ele.dueDate)}</div>
                                         <div id="threeDotsKebabMenu${index}" class="kebab-menu" onclick = "toggleMenu(event)">
@@ -100,7 +102,9 @@ http.createServer(async function (req, res) {
                 subTaskEle += `<div class = "subtaskContainer">
                                 <div id = "subTask${index}${ind}" class = "subtask">
                                     <div class = "subTaskLeft">
-                                        <div id = "priorityLevel${index}${ind}" class = "textStyle priorityLevel">${getPriorityLevel(subEle.priorityLevel)}</div>
+                                        <div id = "priorityLevel${index}${ind}" class = "textStyle priorityLevel">
+                                          ${getPriorityLevel(subEle.priorityLevel)}
+                                        </div>
                                         <div id = "subTaskText${index}${ind}" class = "subTaskText">
                                             <label class = "textStyle font-20" for="checkbox1">${subEle.taskName}</label>
                                             <input type="checkbox" id="checkbox${index}${ind}" class="checkbox" value = ${subEle.taskStatus}>
