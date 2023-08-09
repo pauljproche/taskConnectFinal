@@ -464,7 +464,7 @@ http.createServer(async function (req, res) {
               const client = new MongoClient(uri);
               await client.connect();
               const database = client.db("taskConnect");
-              const collection = database.collection("taskCard");
+              const collection = database.collection("userProfile");
               const dueDate = parsedData.dueDate ? new Date(parsedData.dueDate) : new Date();;
               const newTask = {
                   taskName: parsedData.taskName,
