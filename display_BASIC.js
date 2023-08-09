@@ -184,6 +184,7 @@ http.createServer(async function (req, res) {
                       document.getElementById('rightNav').innerHTML = "<h2> Friend's List: </h2><br/>";
                       document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0].name;
                       document.getElementById('cardContainer').innerHTML = ${JSON.stringify(taskCardEle)};
+                      document.getElementById('left').innerHTML = "<h2> </h2><br/>";
 
                       function toggleMenu(event) {
                         var eventId = event.currentTarget.id;
