@@ -122,10 +122,8 @@ http.createServer(async function (req, res) {
                             </div>
                         </div>`;
               });
-            } else {
-              subTaskEle = `</div>`;
             }
-            taskCardEle += subTaskEle;
+            taskCardEle += subTaskEle + `</div>`;
           });
           if (req.url === '/') {
             htmlResponse = `
