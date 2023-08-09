@@ -137,7 +137,7 @@ http.createServer(async function (req, res) {
                     document.getElementById('rightNav').innerHTML = "<h2> " + queryResult2Array[0].name + " Friend's: </h2><br/>";
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].occupation[0];
                     document.getElementById('rightNav').innerHTML += queryResult2Array[0].follower[0].name;
-                    document.getElementById('cardContainer').innerHTML = ${taskCardEle};
+                    document.getElementById('cardContainer').innerHTML = '${taskCardEle}';
                   </script>
                   </html>`;
           }
