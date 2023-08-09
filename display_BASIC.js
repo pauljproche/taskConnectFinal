@@ -165,7 +165,7 @@ http.createServer(async function (req, res) {
                     document.getElementById('cardContainer').innerHTML = ${JSON.stringify(taskCardEle)};
 
                     /*
-                    //Loop and display every friend information content
+                    //!!!!!Loop and display every friend information content
                     let rightNavContent = "";
                     queryResult2Array.forEach(userProfile => {
                         rightNavContent += "<h2>" + userProfile.name + " Friend's: </h2><br/>";
@@ -176,10 +176,11 @@ http.createServer(async function (req, res) {
                           rightNavContent += follower.name + "<br/>";
                         });
                     });
+                    document.getElementById('rightNav').innerHTML = rightNavContent;
+                    //!!!!!
                     */
 
                     /*
-                    document.getElementById('rightNav').innerHTML = rightNavContent;
                     const queryResult1Array = ${queryResult1String};
 
                     
@@ -190,19 +191,16 @@ http.createServer(async function (req, res) {
                     //document.getElementById('leftNav').innerHTML += "Completion Status: " + queryResult1Array[0].isSubTask + "<br/>";
                     */
                     
-                    /*
-                    let rightNavContent = "";
-                    queryResult2Array.forEach(userProfile => {
-                        rightNavContent += "<h2>" + userProfile.name + " Friend's: </h2><br/>";
-                        userProfile.occupation.forEach(occupation => {
-                          rightNavContent += occupation + "<br/>";
-                        });
-                        userProfile.follower.forEach(follower => {
-                          rightNavContent += follower.name + "<br/>";
-                        });
+                    /*!!!!!
+                    let leftNavContent = "<h2> Task Analytics </h2><br/>";
+                    queryResult1Array.forEach(task => {
+                        leftNavContent += "<h3> Task " + (queryResult1Array.indexOf(task) + 1) + " Progress: </h3><br/>";
+                        leftNavContent += task.taskName + "<br/>";
+                        leftNavContent += getDueDate(task.dueDate) + "<br/>";
+                        // You can add other properties here if required
                     });
-                    document.getElementById('rightNav').innerHTML = rightNavContent;
-                    */
+                    document.getElementById('leftNav').innerHTML = leftNavContent;
+                    !!!!!*/
                   </script>
                   </html>`;
           }
