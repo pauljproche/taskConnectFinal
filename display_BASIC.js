@@ -192,7 +192,7 @@ http.createServer(async function (req, res) {
                             menuItems.classList.add('hidden'); // Hide the menu items
                             openMenuIdArr.pop();
                         }
-                        event.stopPropagation(); // Prevent the click event from propagating to the document
+                        event.stopPropagation(); // Prevent click event from propagating to the document
                       }
 
                       document.addEventListener('click', function (event) {
@@ -301,9 +301,6 @@ http.createServer(async function (req, res) {
                 const age = formData.get('age');
                 const email = formData.get('email');
 
-                // Insert data into MongoDB collection or perform actions
-                // ...
-
                 res.writeHead(302, { 'Location': '/profilepage' });
                 res.end();
             } catch (err) {
@@ -389,10 +386,10 @@ http.createServer(async function (req, res) {
                 res.writeHead(500, { 'Content-Type': 'text/html' });
                 res.end("An error occurred while processing the request.");
             } else {
-                // Splitting the profileHtmlContent at a specific marker (for this example, a comment) to create two parts
+                // Splitting the profileHtmlContent at a specific marker to create two parts
                 let parts = profileHtmlContent.split("<!-- TASKCARD INSERTION POINT -->");
                 
-                // Concatenating the header part, taskCardEle, and footer part
+                // Concat. the header part, taskCardEle, and footer part
                 const finalHtml = parts[0] + taskCardEle + parts[1];
 
                 res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -477,7 +474,7 @@ http.createServer(async function (req, res) {
           }
       }
   });
-// Inside your http.createServer function
+// Inside http.createServer function
 } else if (req.method === 'POST' && req.url === '/loginAuth') {
   let formData = '';
   req.on('data', chunk => {
