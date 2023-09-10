@@ -15,3 +15,6 @@ For the database management system, MongoDB is used, which is a scalable and eff
 
 ----Google Login API------
 1. Ref: https://www.youtube.com/watch?v=PctSxrQ3JrI
+
+URL to MongoDB for TaskConnect:
+https://cloud.mongodb.com/v2/64befad83fa23b059c487676#/clusters
