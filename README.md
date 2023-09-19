@@ -4,6 +4,9 @@ This project meets the growing demand for task management tools that offer an en
 
 Website Link - http://taskconnect12345-e825a4493aff.herokuapp.com/
 
+To quickly access the homepage: Click on the "Login" button on the landing page, and then the "TaskConnect" button on the navigation.
+This will bring you to the home page.
+
 FRONT END DESIGN - URL to Figma Design for TaskConnect:
 https://www.figma.com/file/N5Z9xuoWTYtEqcaljJqIHh/TaskConnect?type=design&node-id=0-1&mode=design&t=h8frYl8IdMzB5ylO-0
 
