@@ -1,4 +1,4 @@
-# TaskConnect - Summer 2023
+# TaskConnect
 Task management tool that allows users to create, manage, and prioritize tasks. To enhance the functionality of TaskConnect, Google Login API is integrated for authentication.
 This project meets the growing demand for task management tools that offer an engaging user experience without overwhelming users with a complex interface.
 
